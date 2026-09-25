@@ -167,6 +167,3 @@ ALL 20 CEP PROJECT AUTOMATED SYSTEM TESTS PASSED SUCCESSFULLY!
 ```
 
 ---
-
-## 📄 College Viva Reference
-Please review **[`PROJECT_EXPLANATION.md`](PROJECT_EXPLANATION.md)** for a beginner-friendly breakdown of all 30 architectural topics and expected viva questions with sample answers.
