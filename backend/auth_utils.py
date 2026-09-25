@@ -1,4 +1,6 @@
 import os
+import smtplib
+from email.message import EmailMessage
 import jwt
 from datetime import datetime, timedelta
 from typing import Optional
@@ -8,7 +10,7 @@ from sqlalchemy.orm import Session
 import bcrypt
 
 from backend.database import get_db
-from backend.models import User
+from backend.models import User, PasswordResetToken
 
 # Configuration
 SECRET_KEY = os.getenv("SECRET_KEY", "college_cep_tiffin_services_secret_key_2026")
@@ -95,3 +97,73 @@ def require_role(allowed_role: str):
             )
         return current_user
     return role_checker
+
+
+def send_reset_email(to_email: str, reset_url: str):
+    """
+    Sends the password reset link through Gmail SMTP.
+    """
+
+    smtp_host = os.getenv("SMTP_HOST", "smtp.gmail.com")
+    smtp_port = int(os.getenv("SMTP_PORT", "587"))
+    smtp_username = os.getenv("SMTP_USERNAME")
+    smtp_password = os.getenv("SMTP_PASSWORD")
+    smtp_from = os.getenv("SMTP_FROM", smtp_username)
+
+    if not smtp_username or not smtp_password:
+        print("[EMAIL ERROR] SMTP credentials are not configured.")
+        print(f"[Password Reset] Reset URL: {reset_url}")
+        return
+
+    message = EmailMessage()
+    message["Subject"] = "CEP Tiffin Services - Password Reset"
+    message["From"] = smtp_from
+    message["To"] = to_email
+
+    message.set_content(
+        f"""Hello,
+
+We received a request to reset your CEP Tiffin Services password.
+
+Click the link below to reset your password:
+
+{reset_url}
+
+This link will expire after 1 hour and can only be used once.
+
+If you did not request a password reset, you can safely ignore this email.
+
+Regards,
+CEP Tiffin Services
+"""
+    )
+
+    try:
+        with smtplib.SMTP(smtp_host, smtp_port) as server:
+            server.starttls()
+            server.login(smtp_username, smtp_password)
+            server.send_message(message)
+
+        print(f"[EMAIL] Password reset email sent to {to_email}")
+
+    except Exception as e:
+        print(f"[EMAIL ERROR] Could not send reset email: {e}")
+        print(f"[Password Reset] Reset URL: {reset_url}")
+
+
+def create_password_reset_token(user_id: int, db: Session) -> str:
+    """Create a password reset token record and return the raw token string."""
+    import uuid
+    token_str = uuid.uuid4().hex
+    expires_at = datetime.utcnow() + timedelta(hours=1)
+    prt = PasswordResetToken(
+        user_id=user_id,
+        token=token_str,
+        expires_at=expires_at,
+        used=False,
+    )
+    db.add(prt)
+    db.commit()
+    db.refresh(prt)
+    return token_str
+

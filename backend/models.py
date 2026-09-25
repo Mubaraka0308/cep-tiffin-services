@@ -26,6 +26,7 @@ class User(Base):
     student_profile = relationship("Student", back_populates="user", uselist=False, cascade="all, delete")
     provider_profile = relationship("Provider", back_populates="user", uselist=False, cascade="all, delete")
     notifications = relationship("Notification", back_populates="user", cascade="all, delete")
+    password_reset_tokens = relationship("PasswordResetToken", back_populates="user", cascade="all, delete")
 
 
 class Student(Base):
@@ -235,6 +236,24 @@ class Message(Base):
     # Relationships
     conversation = relationship("Conversation", back_populates="messages")
     sender = relationship("User")
+
+
+class PasswordResetToken(Base):
+    """
+    Stores one-time password reset tokens for the 'forgot password' flow.
+    Each token expires after 1 hour and can only be used once.
+    """
+    __tablename__ = "password_reset_tokens"
+
+    id = Column(Integer, primary_key=True, index=True)
+    user_id = Column(Integer, ForeignKey("users.id", ondelete="CASCADE"), nullable=False)
+    token = Column(String(255), unique=True, nullable=False, index=True)
+    expires_at = Column(DateTime, nullable=False)
+    used = Column(Boolean, default=False)
+    created_at = Column(DateTime, default=datetime.utcnow)
+
+    # Relationship
+    user = relationship("User", back_populates="password_reset_tokens")
 
 
 class Notification(Base):

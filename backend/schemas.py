@@ -23,9 +23,18 @@ class UserRegister(BaseModel):
     monthly_price: Optional[float] = 2400.0
 
 
+
+class ForgotPasswordRequest(BaseModel):
+    email: EmailStr
+
+class ResetPasswordRequest(BaseModel):
+    token: str = Field(..., min_length=1)
+    new_password: str = Field(..., min_length=6)
+
 class UserLogin(BaseModel):
     username_or_email: str
     password: str
+
 
 
 class TokenResponse(BaseModel):
