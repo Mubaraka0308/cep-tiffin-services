@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Direct Chat | Khane ki Khoj - Tiffin Services</title>
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/dashboard.css">
+  <link rel="stylesheet" href="css/responsive.css">
+</head>
+<body>
+
+  <!-- Navigation Bar -->
+  <header class="navbar">
+    <div class="container nav-container">
+      <a href="index.html" class="brand">
+        <div class="brand-icon">🍲</div>
+        <div class="brand-text">
+          <h1>Khane ki Khoj</h1>
+          <span>Direct Chat • Pune</span>
+        </div>
+      </a>
+
+      <ul class="nav-links">
+        <li><a href="student-dashboard.html">Browse Tiffins</a></li>
+        <li><a href="chat.html" class="active">Messages</a></li>
+      </ul>
+
+      <div class="nav-actions" id="nav-actions">
+        <!-- Injected dynamically by api.js -->
+      </div>
+    </div>
+  </header>
+
+  <!-- Chat Main Wrapper -->
+  <main class="container dashboard-wrapper">
+    <div class="chat-container">
+      <!-- Left Sidebar: Conversations List -->
+      <div class="chat-sidebar">
+        <div class="chat-sidebar-header">
+          💬 Conversations
+        </div>
+        <div class="chat-conversations-list" id="conversations-list">
+          <div style="padding: 24px; text-align: center; color: var(--dark-muted); font-size: 13px;">
+            Loading conversations...
+          </div>
+        </div>
+      </div>
+
+      <!-- Right Main: Chat Messages & Input -->
+      <div class="chat-main">
+        <div class="chat-header">
+          <div class="chat-header-user">
+            <h3 id="chat-active-name">Select a Conversation</h3>
+            <span id="chat-active-role">Direct student-provider communication</span>
+          </div>
+        </div>
+
+        <div class="chat-messages" id="chat-messages-container">
+          <div style="text-align: center; padding: 40px; color: var(--dark-muted); font-size: 14px;">
+            👈 Click on a conversation from the left to read or send messages.
+          </div>
+        </div>
+
+        <form class="chat-input-bar" id="chat-message-form">
+          <input type="text" id="chat-message-input" placeholder="Type a message..." disabled autocomplete="off" required>
+          <button type="submit" class="btn btn-primary" id="chat-send-btn" disabled>Send</button>
+        </form>
+      </div>
+    </div>
+  </main>
+
+  <footer class="footer">
+    <div class="container footer-bottom">
+      <p>© 2026 CEP Tiffin Services Team | Pune, Maharashtra | Khane ki Khoj</p>
+    </div>
+  </footer>
+
+  <script src="js/api.js"></script>
+  <script src="js/chat.js"></script>
+</body>
+</html>

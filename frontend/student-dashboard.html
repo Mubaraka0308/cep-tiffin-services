@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Student Dashboard | Khane ki Khoj - Tiffin Services</title>
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/dashboard.css">
+  <link rel="stylesheet" href="css/responsive.css">
+</head>
+<body>
+
+  <!-- Navigation Bar -->
+  <header class="navbar">
+    <div class="container nav-container">
+      <a href="index.html" class="brand">
+        <div class="brand-icon">🍲</div>
+        <div class="brand-text">
+          <h1>Khane ki Khoj</h1>
+          <span>Student Portal • Pune</span>
+        </div>
+      </a>
+
+      <ul class="nav-links">
+        <li><a href="student-dashboard.html" class="active">Browse Tiffins</a></li>
+        <li><a href="chat.html">Messages</a></li>
+      </ul>
+
+      <div class="nav-actions" id="nav-actions">
+        <!-- Rendered dynamically by api.js -->
+      </div>
+    </div>
+  </header>
+
+  <!-- Student Dashboard Main -->
+  <main class="container dashboard-wrapper">
+    <!-- Header Greeting -->
+    <div class="dashboard-header">
+      <div class="dashboard-title">
+        <h2>Namaste, <span id="student-greeting-name">Student</span>! 👋</h2>
+        <p>Explore verified home-cooked tiffins, check daily kitchen hygiene proofs, and receive instant leave alerts.</p>
+      </div>
+    </div>
+
+    <!-- Active Advertisements Banner -->
+    <section id="ad-banner-section" style="display: none;"></section>
+
+    <!-- Search & Filter Controls -->
+    <section class="filter-bar">
+      <div class="filter-group" style="flex: 2;">
+        <label for="search-input">Search Tiffins</label>
+        <input type="text" id="search-input" class="form-control" placeholder="Search by name, area (Dhankawadi), or thali type...">
+      </div>
+
+      <div class="filter-group">
+        <label for="filter-area">Pune Area</label>
+        <select id="filter-area" class="form-control">
+          <option value="all">All Pune Areas</option>
+          <option value="Dhankawadi">Dhankawadi</option>
+          <option value="Sarita Vihar">Sarita Vihar</option>
+          <option value="Katraj">Katraj</option>
+          <option value="Bibwewadi">Bibwewadi</option>
+        </select>
+      </div>
+
+      <div class="filter-group">
+        <label for="filter-food-type">Food Type</label>
+        <select id="filter-food-type" class="form-control">
+          <option value="all">All Cuisines</option>
+          <option value="Pure Veg">Pure Veg</option>
+          <option value="Veg & Non-Veg">Veg & Non-Veg</option>
+          <option value="Jain Available">Jain Available</option>
+        </select>
+      </div>
+
+      <div class="filter-group">
+        <label for="filter-max-price">Max Meal: <span id="price-display">₹150</span></label>
+        <input type="range" id="filter-max-price" min="50" max="200" step="5" value="150" class="form-control" style="padding: 0;">
+      </div>
+
+      <div style="display:flex; align-items:center; gap:12px; margin-top:14px;">
+        <label class="filter-toggle">
+          <input type="checkbox" id="filter-available-only">
+          <span>Available Today Only</span>
+        </label>
+        <button id="reset-filters-btn" class="btn btn-outline btn-sm">Reset</button>
+      </div>
+    </section>
+
+    <!-- Providers Grid -->
+    <div id="providers-loading" style="text-align: center; padding: 40px; display: none;">
+      <div style="font-size: 28px; margin-bottom: 8px;">🍲</div>
+      <p style="color: var(--dark-muted);">Loading tiffin providers across Pune...</p>
+    </div>
+
+    <div class="providers-grid" id="providers-grid">
+      <!-- Injected dynamically by student.js -->
+    </div>
+
+    <!-- Empty State -->
+    <div id="no-providers-found" style="display: none; text-align: center; padding: 60px 20px;">
+      <div style="font-size: 48px; margin-bottom: 12px;">🔍</div>
+      <h3 style="font-size: 20px; font-weight: 700; color: var(--dark);">No Tiffin Providers Found</h3>
+      <p style="color: var(--dark-muted); margin-top: 6px;">Try adjusting your search criteria or price filters.</p>
+    </div>
+  </main>
+
+  <!-- Tiffin Subscription Modal -->
+  <div class="modal-overlay" id="subscribe-modal">
+    <div class="modal-box">
+      <div class="modal-header">
+        <h3>Subscribe to <span id="sub-provider-name">Tiffin</span></h3>
+        <button class="modal-close-btn" id="sub-close-btn">&times;</button>
+      </div>
+      <form id="subscribe-form">
+        <div class="modal-body">
+          <div class="filter-group" style="margin-bottom: 16px;">
+            <label for="sub-plan-type">Choose Subscription Plan</label>
+            <select id="sub-plan-type" class="form-control" required>
+              <option value="Monthly Lunch & Dinner (Full Mess)">Monthly Lunch & Dinner (Full Mess Card)</option>
+              <option value="Monthly Lunch Only">Monthly Lunch Only</option>
+              <option value="Monthly Dinner Only">Monthly Dinner Only</option>
+              <option value="3-Day Trial Pack">3-Day Trial Pack</option>
+            </select>
+          </div>
+
+          <div class="filter-group">
+            <label for="sub-notes">Hostel Delivery Details & Instructions</label>
+            <textarea id="sub-notes" class="form-control" rows="3" placeholder="e.g. Deliver to Room 204, Boy's Hostel Gate 1, Dhankawadi. Less spicy food preferred."></textarea>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-outline" id="sub-cancel-btn">Cancel</button>
+          <button type="submit" class="btn btn-primary">Confirm Subscription</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container footer-bottom">
+      <p>© 2026 CEP Tiffin Services Team | Pune, Maharashtra | Khane ki Khoj</p>
+    </div>
+  </footer>
+
+  <script src="js/api.js"></script>
+  <script src="js/student.js"></script>
+</body>
+</html>

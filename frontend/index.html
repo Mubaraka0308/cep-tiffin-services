@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Khane ki Khoj - Tiffin Services | College CEP Project</title>
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/responsive.css">
+</head>
+<body>
+
+  <!-- Navigation Bar -->
+  <header class="navbar">
+    <div class="container nav-container">
+      <a href="index.html" class="brand">
+        <div class="brand-icon">🍲</div>
+        <div class="brand-text">
+          <h1>Khane ki Khoj</h1>
+          <span>Tiffin Services • Pune</span>
+        </div>
+      </a>
+
+      <ul class="nav-links">
+        <li><a href="index.html" class="active">Home</a></li>
+        <li><a href="student-dashboard.html">Explore Tiffins</a></li>
+        <li><a href="#how-it-works">How It Works</a></li>
+        <!-- <li><a href="#cep-story">CEP Project Story</a></li> -->
+      </ul>
+
+      <div class="nav-actions" id="nav-actions">
+        <!-- Injected dynamically by api.js based on login state -->
+        <a href="login.html" class="btn btn-outline btn-sm">Login</a>
+        <a href="register.html" class="btn btn-primary btn-sm">Sign Up</a>
+      </div>
+    </div>
+  </header>
+
+  <!-- Hero Section -->
+  <section class="hero">
+    <div class="container hero-content">
+      <span class="hero-tag">Community Engagement Project</span>
+      <h1 class="hero-title">
+        Find the Right <span>Tiffin for You</span>
+      </h1>
+      <p class="hero-subtitle">
+        Connecting hostel students with verified home-cooked tiffins and local messes across Dhankawadi, Sarita Vihar, and Katraj, Pune.
+      </p>
+
+      <!-- Quick Search Bar -->
+      <form class="hero-search-box" action="student-dashboard.html" method="GET">
+        <input type="text" name="search" placeholder="Search by tiffin name, area (Dhankawadi, Katraj), or cuisine..." required>
+        <button type="submit" class="btn btn-primary">Find Tiffin</button>
+      </form>
+
+      <!-- CEP Survey Grounded Metrics -->
+      <div class="hero-stats">
+        <div class="stat-box">
+          <div class="stat-number">4+</div>
+          <div class="stat-label">Verified Home Kitchens</div>
+        </div>
+        <div class="stat-box">
+          <div class="stat-number">100+</div>
+          <div class="stat-label">Student Survey Responses</div>
+        </div>
+        <div class="stat-box">
+          <div class="stat-number">₹60 - ₹95</div>
+          <div class="stat-label">Affordable Student Meals</div>
+        </div>
+        <div class="stat-box">
+          <div class="stat-number">100%</div>
+          <div class="stat-label">Daily Hygiene Proofs</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Featured Providers -->
+  <section class="section">
+    <div class="container">
+      <div class="section-title-wrap">
+        <h2 class="section-title">Featured Tiffin Services in Pune</h2>
+        <p class="section-subtitle">Real home cooks and student messes surveyed and onboarded during our field research.</p>
+      </div>
+
+      <div class="providers-grid" id="featured-providers-grid">
+        <!-- Rendered dynamically or pre-loaded via JS -->
+      </div>
+
+      <div style="text-align: center; margin-top: 36px;">
+        <a href="student-dashboard.html" class="btn btn-primary btn-lg">Explore All Tiffin Providers →</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- How It Works Section -->
+  <section class="section" id="how-it-works" style="background: #ffffff; border-top: 1px solid var(--border); border-bottom: 1px solid var(--border);">
+    <div class="container">
+      <div class="section-title-wrap">
+        <h2 class="section-title">How Khane ki Khoj Works</h2>
+        <p class="section-subtitle">Addressing both student meal problems and local tiffin provider challenges.</p>
+      </div>
+
+      <div class="features-grid">
+        <div class="feature-card">
+          <div class="feature-icon">🔍</div>
+          <h3 class="feature-title">Discover Nearby Tiffins</h3>
+          <p class="feature-desc">Easily browse local tiffin providers and messes in Pune by area, budget, and meal preference (Veg, Non-Veg, or Jain).</p>
+        </div>
+
+        <div class="feature-card">
+          <div class="feature-icon">🧼</div>
+          <h3 class="feature-title">Daily Hygiene Updates</h3>
+          <p class="feature-desc">Providers post fresh daily kitchen and utensil hygiene photos so students know where their food is prepared.</p>
+        </div>
+
+        <div class="feature-card">
+          <div class="feature-icon">📢</div>
+          <h3 class="feature-title">Advance Leave Alerts</h3>
+          <p class="feature-desc">Never go hungry unexpectedly. Providers schedule leave pre-notices so students receive instant alerts in advance.</p>
+        </div>
+
+        <div class="feature-card">
+          <div class="feature-icon">💬</div>
+          <h3 class="feature-title">Direct Student-Provider Chat</h3>
+          <p class="feature-desc">Chat directly with the aunties and mess managers to request extra chapatis, pause meals, or discuss timings.</p>
+        </div>
+
+        <div class="feature-card">
+          <div class="feature-icon">⭐</div>
+          <h3 class="feature-title">Genuine Reviews with Proof</h3>
+          <p class="feature-desc">Students share weekly ratings and meal photos so new hostel students can rely on authentic feedback.</p>
+        </div>
+
+        <div class="feature-card">
+          <div class="feature-icon">👥</div>
+          <h3 class="feature-title">Customer Count Tracking</h3>
+          <p class="feature-desc">Local providers view their real active student customer directory, helping them plan daily groceries without wastage.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CEP Project Story Section -->
+  <section class="section" id="cep-story">
+    <div class="container">
+      <div style="background: var(--primary-soft); border-radius: var(--radius-lg); padding: 40px; border: 1px solid #fed7aa;">
+        <span class="badge" style="background: var(--primary); color: #fff; margin-bottom: 12px; display: inline-block;">Our Research Story</span>
+        <h2 style="font-size: 26px; font-weight: 800; color: #7c2d12; margin-bottom: 14px;">Built from Real Ground Research in Pune</h2>
+        <p style="font-size: 15px; color: #9a3412; line-height: 1.7; margin-bottom: 20px;">
+          As second-year engineering students, our Community Engagement Project (CEP) began by investigating daily food insecurity and meal dissatisfaction among hostel residents. Over 7 weeks, we conducted student surveys, tiffin provider surveys, and offline field visits to local kitchens in <strong>Sarita Vihar, Dhankawadi, and Katraj</strong>. We discovered that providers struggle with advertising and communication, while students struggle with hygiene trust and sudden provider closures. <em>Khane ki Khoj</em> was designed to bridge this gap.
+        </p>
+        <div style="display: flex; gap: 14px; flex-wrap: wrap;">
+          <a href="register.html" class="btn btn-primary">Join as a Student</a>
+          <a href="register.html?role=provider" class="btn btn-outline" style="background:#fff;">Register as a Provider</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-content">
+        <div class="footer-brand">
+          <h2>Khane ki Khoj 🍲</h2>
+          <p>A Community Engagement Project dedicated to making daily meals predictable, hygienic, and affordable for students in Pune.</p>
+        </div>
+        <div class="footer-links">
+          <h4>Quick Links</h4>
+          <ul>
+            <li><a href="student-dashboard.html">Find Tiffins</a></li>
+            <li><a href="login.html">Student Login</a></li>
+            <li><a href="login.html?role=provider">Provider Login</a></li>
+            <li><a href="register.html">Sign Up</a></li>
+          </ul>
+        </div>
+        <div class="footer-links">
+          <h4>Key Features</h4>
+          <ul>
+            <li>Daily Hygiene Proof</li>
+            <li>Advance Leave Notice</li>
+            <li>Direct Chat</li>
+            <li>Genuine Weekly Ratings</li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>© 2026 CEP Tiffin Services Team | Pune, Maharashtra | Built with HTML, CSS, JavaScript, FastAPI & PostgreSQL</p>
+      </div>
+    </div>
+  </footer>
+
+  <script src="js/api.js"></script>
+  <script>
+    // Quick load featured providers on landing page
+    document.addEventListener("DOMContentLoaded", async () => {
+      try {
+        const providers = await apiGet("/api/providers");
+        const grid = document.getElementById("featured-providers-grid");
+        if (!grid || !providers) return;
+
+        grid.innerHTML = providers.slice(0, 3).map(p => `
+          <div class="provider-card">
+            <div class="provider-card-img-wrap">
+              <img src="${p.profile_image || 'https://images.unsplash.com/photo-1546833999-b9f581a1996d?w=600'}" alt="${p.service_name}" class="provider-card-img">
+              <span class="provider-status-badge ${p.is_available ? 'status-available' : 'status-unavailable'}">
+                ${p.is_available ? '✅ Available' : '⚠️ On Leave'}
+              </span>
+              ${p.today_hygiene_image ? '<div class="provider-hygiene-tag">🧼 Daily Hygiene Proof</div>' : ''}
+            </div>
+            <div class="provider-card-body">
+              <div style="display:flex; justify-content:space-between; align-items:flex-start; margin-bottom:4px;">
+                <h3 class="provider-card-title">${p.service_name}</h3>
+                <span class="badge badge-rating">⭐ ${p.average_rating > 0 ? p.average_rating : 'New'}</span>
+              </div>
+              <div class="provider-card-area">📍 ${p.area}</div>
+              <p style="font-size:13px; color:var(--dark-muted); margin-bottom:12px;">
+                ${p.description ? p.description.slice(0, 90) + '...' : ''}
+              </p>
+              <div class="provider-card-footer">
+                <div class="price-tag">₹<strong>${p.single_meal_price}</strong> / meal</div>
+                <a href="provider-profile.html?id=${p.id}" class="btn btn-primary btn-sm">View Menu</a>
+              </div>
+            </div>
+          </div>
+        `).join("");
+      } catch (err) {
+        console.error(err);
+      }
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sign Up | Khane ki Khoj - Tiffin Services</title>
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/dashboard.css">
+  <link rel="stylesheet" href="css/responsive.css">
+  <style>
+    .auth-container {
+      min-height: calc(100vh - 144px);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 40px 20px;
+    }
+    .auth-card {
+      background: #ffffff;
+      border-radius: var(--radius-md);
+      border: 1px solid var(--border);
+      box-shadow: var(--shadow-md);
+      width: 100%;
+      max-width: 520px;
+      padding: 36px 32px;
+    }
+    .role-selector {
+      display: flex;
+      gap: 12px;
+      margin-bottom: 24px;
+    }
+    .role-option {
+      flex: 1;
+      border: 2px solid var(--border);
+      border-radius: var(--radius-sm);
+      padding: 14px;
+      text-align: center;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+    .role-option input {
+      display: none;
+    }
+    .role-option.selected {
+      border-color: var(--primary);
+      background: var(--primary-soft);
+      font-weight: 700;
+      color: var(--primary-dark);
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Navigation Bar -->
+  <header class="navbar">
+    <div class="container nav-container">
+      <a href="index.html" class="brand">
+        <div class="brand-icon">🍲</div>
+        <div class="brand-text">
+          <h1>Khane ki Khoj</h1>
+          <span>Tiffin Services • Pune</span>
+        </div>
+      </a>
+      <div class="nav-actions" id="nav-actions">
+        <a href="login.html" class="btn btn-outline btn-sm">Login</a>
+      </div>
+    </div>
+  </header>
+
+  <!-- Register Main -->
+  <main class="auth-container">
+    <div class="auth-card">
+      <div style="text-align: center; margin-bottom: 24px;">
+        <div style="font-size: 36px; margin-bottom: 6px;">📝</div>
+        <h2 style="font-size: 24px; font-weight: 800; color: var(--dark);">Create Your Account</h2>
+        <p style="font-size: 14px; color: var(--dark-muted);">Join Khane ki Khoj as a student or tiffin provider</p>
+      </div>
+
+      <!-- Role Selection -->
+      <div class="role-selector">
+        <label class="role-option selected" id="label-student">
+          <input type="radio" name="role" id="role-student" value="student" checked>
+          <div style="font-size: 20px;">🎓</div>
+          <div>Student / Customer</div>
+        </label>
+        <label class="role-option" id="label-provider">
+          <input type="radio" name="role" id="role-provider" value="provider">
+          <div style="font-size: 20px;">🍲</div>
+          <div>Tiffin Provider / Mess</div>
+        </label>
+      </div>
+
+      <div id="register-error-alert" class="toast toast-error" style="display:none; position:static; animation:none; min-width:auto; margin-bottom:18px;"></div>
+
+      <form id="register-form">
+        <div class="filter-group" style="margin-bottom: 14px;">
+          <label for="reg-name">Full Name</label>
+          <input type="text" id="reg-name" class="form-control" placeholder="e.g. Aarav Sharma or Sunita Deshmukh" required>
+        </div>
+
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 14px;">
+          <div class="filter-group">
+            <label for="reg-email">Email Address</label>
+            <input type="email" id="reg-email" class="form-control" placeholder="name@college.edu" required>
+          </div>
+          <div class="filter-group">
+            <label for="reg-username">Username</label>
+            <input type="text" id="reg-username" class="form-control" placeholder="username" required>
+          </div>
+        </div>
+
+        <div class="filter-group" style="margin-bottom: 14px;">
+          <label for="reg-phone">Phone / WhatsApp Number</label>
+          <input type="tel" id="reg-phone" class="form-control" placeholder="e.g. 9823011223" required>
+        </div>
+
+        <!-- Dynamic Student Fields -->
+        <div id="student-fields" style="background: #fafaf9; padding: 14px; border-radius: var(--radius-sm); border: 1px solid var(--border); margin-bottom: 14px;">
+          <h4 style="font-size: 13px; color: var(--dark-muted); text-transform: uppercase; margin-bottom: 10px;">Student Information</h4>
+          <div class="filter-group" style="margin-bottom: 10px;">
+            <label for="reg-college">College / University Name</label>
+            <input type="text" id="reg-college" class="form-control" placeholder="e.g. PIET / Pune University">
+          </div>
+          <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px;">
+            <div class="filter-group">
+              <label for="reg-area">Hostel / Staying Area</label>
+              <select id="reg-area" class="form-control">
+                <option value="Dhankawadi">Dhankawadi</option>
+                <option value="Sarita Vihar">Sarita Vihar</option>
+                <option value="Katraj">Katraj</option>
+                <option value="Bibwewadi">Bibwewadi</option>
+                <option value="Other Area, Pune">Other Area, Pune</option>
+              </select>
+            </div>
+            <div class="filter-group">
+              <label for="reg-preference">Meal Preference</label>
+              <select id="reg-preference" class="form-control">
+                <option value="veg">Pure Veg</option>
+                <option value="both">Veg & Non-Veg</option>
+                <option value="jain">Jain Available</option>
+              </select>
+            </div>
+          </div>
+        </div>
+
+        <!-- Dynamic Provider Fields -->
+        <div id="provider-fields" style="display: none; background: #fff8f0; padding: 14px; border-radius: var(--radius-sm); border: 1px solid #fed7aa; margin-bottom: 14px;">
+          <h4 style="font-size: 13px; color: #9a3412; text-transform: uppercase; margin-bottom: 10px;">Tiffin Business Details</h4>
+          <div class="filter-group" style="margin-bottom: 10px;">
+            <label for="reg-service-name">Tiffin / Mess Service Name</label>
+            <input type="text" id="reg-service-name" class="form-control" placeholder="e.g. Annapurna Tiffin Services">
+          </div>
+          <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 10px;">
+            <div class="filter-group">
+              <label for="reg-provider-area">Operating Area (Pune)</label>
+              <input type="text" id="reg-provider-area" class="form-control" placeholder="e.g. Dhankawadi, Pune">
+            </div>
+            <div class="filter-group">
+              <label for="reg-food-type">Food Type</label>
+              <select id="reg-food-type" class="form-control">
+                <option value="Pure Veg">Pure Veg</option>
+                <option value="Veg & Non-Veg">Veg & Non-Veg</option>
+                <option value="Jain Available">Jain Available</option>
+              </select>
+            </div>
+          </div>
+          <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px;">
+            <div class="filter-group">
+              <label for="reg-meal-price">Single Meal Price (₹)</label>
+              <input type="number" id="reg-meal-price" class="form-control" value="80" min="40" max="250">
+            </div>
+            <div class="filter-group">
+              <label for="reg-monthly-price">Monthly Plan (₹)</label>
+              <input type="number" id="reg-monthly-price" class="form-control" value="2400" min="1000" max="6000">
+            </div>
+          </div>
+        </div>
+
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 22px;">
+          <div class="filter-group">
+            <label for="reg-password">Password</label>
+            <input type="password" id="reg-password" class="form-control" placeholder="Min. 6 characters" required>
+          </div>
+          <div class="filter-group">
+            <label for="reg-confirm-password">Confirm Password</label>
+            <input type="password" id="reg-confirm-password" class="form-control" placeholder="Re-enter password" required>
+          </div>
+        </div>
+
+        <button type="submit" class="btn btn-primary" style="width: 100%; padding: 12px; font-size: 15px;">
+          Create Account
+        </button>
+      </form>
+
+      <div style="text-align: center; margin-top: 20px; font-size: 14px; color: var(--dark-muted);">
+        Already have an account? <a href="login.html" style="font-weight: 600;">Login now</a>
+      </div>
+    </div>
+  </main>
+
+  <script src="js/api.js"></script>
+  <script src="js/auth.js"></script>
+  <script>
+    // Handle visual highlight on role selection
+    const rStudent = document.getElementById("role-student");
+    const rProvider = document.getElementById("role-provider");
+    const lblStudent = document.getElementById("label-student");
+    const lblProvider = document.getElementById("label-provider");
+
+    function syncRoleUI() {
+      if (rStudent.checked) {
+        lblStudent.classList.add("selected");
+        lblProvider.classList.remove("selected");
+      } else {
+        lblProvider.classList.add("selected");
+        lblStudent.classList.remove("selected");
+      }
+    }
+
+    rStudent.addEventListener("change", syncRoleUI);
+    rProvider.addEventListener("change", syncRoleUI);
+
+    // Preselect role if passed in query param
+    const params = new URLSearchParams(window.location.search);
+    if (params.get("role") === "provider") {
+      rProvider.checked = true;
+      syncRoleUI();
+      rProvider.dispatchEvent(new Event("change"));
+    }
+  </script>
+</body>
+</html>

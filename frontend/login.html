@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Login | Khane ki Khoj - Tiffin Services</title>
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/dashboard.css">
+  <link rel="stylesheet" href="css/responsive.css">
+  <style>
+    .auth-container {
+      min-height: calc(100vh - 144px);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 40px 20px;
+    }
+    .auth-card {
+      background: #ffffff;
+      border-radius: var(--radius-md);
+      border: 1px solid var(--border);
+      box-shadow: var(--shadow-md);
+      width: 100%;
+      max-width: 460px;
+      padding: 36px 32px;
+    }
+    .auth-header {
+      text-align: center;
+      margin-bottom: 28px;
+    }
+    .auth-header h2 {
+      font-size: 24px;
+      font-weight: 800;
+      color: var(--dark);
+    }
+    .auth-header p {
+      font-size: 14px;
+      color: var(--dark-muted);
+      margin-top: 4px;
+    }
+    .demo-credentials-box {
+      background: #fff8f0;
+      border: 1px dashed #fdba74;
+      border-radius: var(--radius-sm);
+      padding: 14px;
+      margin-bottom: 22px;
+      font-size: 13px;
+    }
+    .demo-btn-group {
+      display: flex;
+      gap: 8px;
+      margin-top: 8px;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Navigation Bar -->
+  <header class="navbar">
+    <div class="container nav-container">
+      <a href="index.html" class="brand">
+        <div class="brand-icon">🍲</div>
+        <div class="brand-text">
+          <h1>Khane ki Khoj</h1>
+          <span>Tiffin Services • Pune</span>
+        </div>
+      </a>
+      <div class="nav-actions" id="nav-actions">
+        <a href="register.html" class="btn btn-outline btn-sm">Sign Up</a>
+      </div>
+    </div>
+  </header>
+
+  <!-- Login Main -->
+  <main class="auth-container">
+    <div class="auth-card">
+      <div class="auth-header">
+        <div style="font-size: 38px; margin-bottom: 8px;">🔑</div>
+        <h2>Welcome to Khane ki Khoj!</h2>
+        <p>Find your daily lunch and dinner plans here.</p>
+      </div>
+
+      <!-- Demo Accounts Box for Viva Evaluation -->
+      <div class="demo-credentials-box">
+        <div style="font-weight: 600; color: #9a3412;">Demo Access:</div>
+        
+        <div class="demo-btn-group">
+          <button type="button" class="btn btn-sm btn-outline" onclick="fillDemo('aarav_student', 'password123')">Student Login</button>
+          <button type="button" class="btn btn-sm btn-outline" onclick="fillDemo('annapurna_tiffin', 'password123')">Provider Login</button>
+        </div>
+      </div>
+
+      <div id="login-error-alert" class="toast toast-error" style="display:none; position:static; animation:none; min-width:auto; margin-bottom:18px;"></div>
+
+      <form id="login-form">
+        <div class="filter-group" style="margin-bottom: 16px;">
+          <label for="username_or_email">Username or Email</label>
+          <input type="text" id="username_or_email" class="form-control" placeholder="Enter username or email" required>
+        </div>
+
+        <div class="filter-group" style="margin-bottom: 24px;">
+          <label for="password">Password</label>
+          <input type="password" id="password" class="form-control" placeholder="Enter your password" required>
+        </div>
+
+        <button type="submit" class="btn btn-primary" style="width: 100%; padding: 12px; font-size: 15px;">
+          Login to Account
+        </button>
+      </form>
+
+      <div style="text-align: center; margin-top: 20px; font-size: 14px; color: var(--dark-muted);">
+        Don't have an account? <a href="register.html" style="font-weight: 600;">Sign Up now</a>
+      </div>
+    </div>
+  </main>
+
+  <script src="js/api.js"></script>
+  <script src="js/auth.js"></script>
+  <script>
+    function fillDemo(username, password) {
+      document.getElementById('username_or_email').value = username;
+      document.getElementById('password').value = password;
+      showToast(`Filled demo credentials for ${username}`, "info");
+    }
+  </script>
+</body>
+</html>
