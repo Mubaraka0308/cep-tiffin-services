@@ -3,8 +3,9 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Khane ki Khoj - Tiffin Services | College CEP Project</title>
+  <title>Khane Ki Khoj | Find Home-Style Tiffin Services Near You</title>
   <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/dashboard.css">
   <link rel="stylesheet" href="css/responsive.css">
 </head>
 <body>
@@ -13,145 +14,163 @@
   <header class="navbar">
     <div class="container nav-container">
       <a href="index.html" class="brand">
-        <div class="brand-icon">🍲</div>
+        <div class="brand-icon-box">🍱</div>
         <div class="brand-text">
-          <h1>Khane ki Khoj</h1>
-          <span>Tiffin Services • Pune</span>
+          <h1>Khane Ki Khoj</h1>
+          <span>Home-Style Tiffin Services</span>
         </div>
       </a>
 
       <ul class="nav-links">
         <li><a href="index.html" class="active">Home</a></li>
-        <li><a href="student-dashboard.html">Explore Tiffins</a></li>
-        <li><a href="#how-it-works">How It Works</a></li>
-        <!-- <li><a href="#cep-story">CEP Project Story</a></li> -->
+        <li><a href="student-dashboard.html">Browse Tiffins</a></li>
       </ul>
 
       <div class="nav-actions" id="nav-actions">
-        <!-- Injected dynamically by api.js based on login state -->
-        <a href="login.html" class="btn btn-outline btn-sm">Login</a>
+        <!-- Rendered dynamically by api.js based on auth state -->
+        <a href="login.html" class="btn btn-secondary btn-sm">Login</a>
         <a href="register.html" class="btn btn-primary btn-sm">Sign Up</a>
       </div>
     </div>
   </header>
 
   <!-- Hero Section -->
-  <section class="hero">
-    <div class="container hero-content">
-      <span class="hero-tag">Community Engagement Project</span>
-      <h1 class="hero-title">
-        Find the Right <span>Tiffin for You</span>
-      </h1>
-      <p class="hero-subtitle">
-        Connecting hostel students with verified home-cooked tiffins and local messes across Pune.
-      </p>
+  <section class="hero-section">
+    <div class="container">
+      <div class="hero-grid">
+        <!-- Hero Left Content -->
+        <div class="hero-left">
+          <span class="hero-tag">✨ KHANE KI KHOJ</span>
+          <h1 class="hero-title">
+            Find Home-Style <span>Tiffin Services</span> Near You
+          </h1>
+          <p class="hero-subtitle">
+            Discover trusted local tiffin providers, explore menus, check hygiene updates, compare ratings and subscribe to meals that feel like home.
+          </p>
 
-      <!-- Quick Search Bar -->
-      <form class="hero-search-box" action="student-dashboard.html" method="GET">
-        <input type="text" name="search" placeholder="Search by tiffin name, area (Dhankawadi, Katraj), or cuisine..." required>
-        <button type="submit" class="btn btn-primary">Find Tiffin</button>
-      </form>
+          <div class="hero-btn-group">
+            <a href="student-dashboard.html" class="btn btn-primary btn-lg">Browse Tiffins</a>
+            <a href="register.html?role=provider" class="btn btn-secondary btn-lg">Become a Provider</a>
+          </div>
+        </div>
 
-      <!-- CEP Survey Grounded Metrics -->
-      <div class="hero-stats">
-        <div class="stat-box">
-          <div class="stat-number">4+</div>
-          <div class="stat-label">Verified Home Kitchens</div>
-        </div>
-        <div class="stat-box">
-          <div class="stat-number">100+</div>
-          <div class="stat-label">Student Survey Responses</div>
-        </div>
-        <div class="stat-box">
-          <div class="stat-number">₹60 - ₹95</div>
-          <div class="stat-label">Affordable Student Meals</div>
-        </div>
-        <div class="stat-box">
-          <div class="stat-number">100%</div>
-          <div class="stat-label">Daily Hygiene Proofs</div>
+        <!-- Hero Right Food Image -->
+        <div class="hero-image-wrapper">
+          <div class="hero-image-container">
+            <img src="https://images.unsplash.com/photo-1610057099443-fde8c4d50f91?w=800&auto=format&fit=crop&q=80" alt="Fresh Home-Style Indian Thali">
+          </div>
+          <!-- Floating rating pill card from Figma reference -->
+          <div class="floating-badge">
+            <div class="floating-badge-icon">⭐</div>
+            <div class="floating-badge-text">
+              <strong>4.8 Rating</strong>
+              <span>Trusted Local Providers</span>
+            </div>
+          </div>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- Featured Providers -->
+  <!-- Why Khane Ki Khoj? Section (4 Pastel Cards) -->
   <section class="section">
     <div class="container">
-      <div class="section-title-wrap">
-        <h2 class="section-title">Featured Tiffin Services in Pune</h2>
-        <p class="section-subtitle">Real home cooks and student messes surveyed and onboarded during our field research.</p>
+      <div class="section-header">
+        <h2 class="section-title">Why Khane Ki Khoj?</h2>
+        <p class="section-subtitle">A Community Engagement Project connecting college hostel students with verified home kitchens across Pune.</p>
+      </div>
+
+      <div class="features-grid-4">
+        <!-- Card 1 -->
+        <div class="feature-pill-card">
+          <div class="feature-pill-icon">🍱</div>
+          <h3 class="feature-pill-title">Home-style Meals</h3>
+          <p class="feature-pill-desc">Fresh, wholesome meals made with authentic home recipes by trusted neighborhood tiffin cooks.</p>
+        </div>
+
+        <!-- Card 2 -->
+        <div class="feature-pill-card">
+          <div class="feature-pill-icon">📍</div>
+          <h3 class="feature-pill-title">Nearby Providers</h3>
+          <p class="feature-pill-desc">Discover friendly kitchens in Dhankawadi, Katraj, Sarita Vihar, and across your college radius.</p>
+        </div>
+
+        <!-- Card 3 -->
+        <div class="feature-pill-card">
+          <div class="feature-pill-icon">🧼</div>
+          <h3 class="feature-pill-title">Hygiene Updates</h3>
+          <p class="feature-pill-desc">View provider-submitted daily hygiene updates and kitchen photos before ordering your thali.</p>
+        </div>
+
+        <!-- Card 4 -->
+        <div class="feature-pill-card">
+          <div class="feature-pill-icon">⭐</div>
+          <h3 class="feature-pill-title">Trusted Reviews</h3>
+          <p class="feature-pill-desc">Genuine ratings, roti softness scores, and meal photo proofs verified by fellow students.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Popular Tiffin Services Section -->
+  <section class="section" style="background-color: var(--bg-surface); border-top: 1px solid var(--border-warm); border-bottom: 1px solid var(--border-warm);">
+    <div class="container">
+      <div class="content-section-header">
+        <div>
+          <h2 class="section-title" style="margin-bottom: 4px;">Popular Tiffin Services</h2>
+          <p class="section-subtitle" style="text-align: left; margin: 0;">Explore top-rated homemade tiffins loved by university students.</p>
+        </div>
+        <a href="student-dashboard.html" class="btn btn-secondary btn-sm">View All →</a>
       </div>
 
       <div class="providers-grid" id="featured-providers-grid">
-        <!-- Rendered dynamically or pre-loaded via JS -->
-      </div>
-
-      <div style="text-align: center; margin-top: 36px;">
-        <a href="student-dashboard.html" class="btn btn-primary btn-lg">Explore All Tiffin Providers →</a>
+        <!-- Injected dynamically by API or filled gracefully -->
       </div>
     </div>
   </section>
 
-  <!-- How It Works Section -->
-  <section class="section" id="how-it-works" style="background: #ffffff; border-top: 1px solid var(--border); border-bottom: 1px solid var(--border);">
+  <!-- How It Works Section (3 Steps) -->
+  <section class="section">
     <div class="container">
-      <div class="section-title-wrap">
-        <h2 class="section-title">How Khane ki Khoj Works</h2>
-        <p class="section-subtitle">Addressing both student meal problems and local tiffin provider challenges.</p>
+      <div class="section-header">
+        <h2 class="section-title">How It Works</h2>
+        <p class="section-subtitle">Simple, straightforward, and designed for students away from home.</p>
       </div>
 
-      <div class="features-grid">
-        <div class="feature-card">
-          <div class="feature-icon">🔍</div>
-          <h3 class="feature-title">Discover Nearby Tiffins</h3>
-          <p class="feature-desc">Easily browse local tiffin providers and messes in Pune by area, budget, and meal preference (Veg, Non-Veg, or Jain).</p>
+      <div class="how-it-works-grid">
+        <!-- Step 1 -->
+        <div class="step-card">
+          <span class="step-number">01</span>
+          <h3 class="step-title">Discover</h3>
+          <p class="step-desc">Find verified tiffin providers operating near your college or hostel area with transparent pricing.</p>
         </div>
 
-        <div class="feature-card">
-          <div class="feature-icon">🧼</div>
-          <h3 class="feature-title">Daily Hygiene Updates</h3>
-          <p class="feature-desc">Providers post fresh daily kitchen and utensil hygiene photos so students know where their food is prepared.</p>
+        <!-- Step 2 -->
+        <div class="step-card">
+          <span class="step-number">02</span>
+          <h3 class="step-title">Explore</h3>
+          <p class="step-desc">Check daily menus, prices, ratings, advance leave notices, and kitchen hygiene photo proofs.</p>
         </div>
 
-        <div class="feature-card">
-          <div class="feature-icon">📢</div>
-          <h3 class="feature-title">Advance Leave Alerts</h3>
-          <p class="feature-desc">Never go hungry unexpectedly. Providers schedule leave pre-notices so students receive instant alerts in advance.</p>
-        </div>
-
-        <div class="feature-card">
-          <div class="feature-icon">💬</div>
-          <h3 class="feature-title">Direct Student-Provider Chat</h3>
-          <p class="feature-desc">Chat directly with the aunties and mess managers to request extra chapatis, pause meals, or discuss timings.</p>
-        </div>
-
-        <div class="feature-card">
-          <div class="feature-icon">⭐</div>
-          <h3 class="feature-title">Genuine Reviews with Proof</h3>
-          <p class="feature-desc">Students share weekly ratings and meal photos so new hostel students can rely on authentic feedback.</p>
-        </div>
-
-        <div class="feature-card">
-          <div class="feature-icon">👥</div>
-          <h3 class="feature-title">Customer Count Tracking</h3>
-          <p class="feature-desc">Local providers view their real active student customer directory, helping them plan daily groceries without wastage.</p>
+        <!-- Step 3 -->
+        <div class="step-card">
+          <span class="step-number">03</span>
+          <h3 class="step-title">Subscribe</h3>
+          <p class="step-desc">Choose your preferred meal plan, chat directly with the cook, and enjoy predictable home food.</p>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- CEP Project Story Section -->
-  <section class="section" id="cep-story">
+  <!-- Bottom CTA Banner -->
+  <section class="section" style="padding-top: 0;">
     <div class="container">
-      <div style="background: var(--primary-soft); border-radius: var(--radius-lg); padding: 40px; border: 1px solid #fed7aa;">
-        <span class="badge" style="background: var(--primary); color: #fff; margin-bottom: 12px; display: inline-block;">Our Research Story</span>
-        <h2 style="font-size: 26px; font-weight: 800; color: #7c2d12; margin-bottom: 14px;">Built from Real Ground Research in Pune</h2>
-        <p style="font-size: 15px; color: #9a3412; line-height: 1.7; margin-bottom: 20px;">
-          As second-year engineering students, our Community Engagement Project (CEP) began by investigating daily food insecurity and meal dissatisfaction among hostel residents. Over 7 weeks, we conducted student surveys, tiffin provider surveys, and offline field visits to local kitchens in <strong>Sarita Vihar, Dhankawadi, and Katraj</strong>. We discovered that providers struggle with advertising and communication, while students struggle with hygiene trust and sudden provider closures. <em>Khane ki Khoj</em> was designed to bridge this gap.
-        </p>
-        <div style="display: flex; gap: 14px; flex-wrap: wrap;">
-          <a href="register.html" class="btn btn-primary">Join as a Student</a>
-          <a href="register.html?role=provider" class="btn btn-outline" style="background:#fff;">Register as a Provider</a>
+      <div class="cta-banner-wrapper">
+        <img src="https://images.unsplash.com/photo-1546833999-b9f581a1996d?w=700&auto=format&fit=crop&q=80" alt="Indian Tiffin Food" class="cta-banner-image">
+        <div class="cta-banner-content">
+          <h2>Fresh Food. Local Providers. Better Choices.</h2>
+          <p>Join hundreds of students in Pune enjoying healthy, affordable, and stress-free home food every single day.</p>
+          <a href="student-dashboard.html" class="btn btn-primary btn-lg">Browse Tiffins</a>
         </div>
       </div>
     </div>
@@ -162,70 +181,77 @@
     <div class="container">
       <div class="footer-content">
         <div class="footer-brand">
-          <h2>Khane ki Khoj 🍲</h2>
-          <p>A Community Engagement Project dedicated to making daily meals predictable, hygienic, and affordable for students in Pune.</p>
+          <h2>Khane Ki Khoj 🍱</h2>
+          <p>A college Community Engagement Project (CEP) connecting students and local tiffin cooks for trustworthy, hygienic, home-style food.</p>
         </div>
         <div class="footer-links">
-          <h4>Quick Links</h4>
+          <h4>Navigation</h4>
           <ul>
-            <li><a href="student-dashboard.html">Find Tiffins</a></li>
-            <li><a href="login.html">Student Login</a></li>
-            <li><a href="login.html?role=provider">Provider Login</a></li>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="student-dashboard.html">Browse Tiffins</a></li>
+            <li><a href="login.html">Login</a></li>
             <li><a href="register.html">Sign Up</a></li>
           </ul>
         </div>
         <div class="footer-links">
-          <h4>Key Features</h4>
+          <h4>Trust Features</h4>
           <ul>
-            <li>Daily Hygiene Proof</li>
-            <li>Advance Leave Notice</li>
-            <li>Direct Chat</li>
-            <li>Genuine Weekly Ratings</li>
+            <li><a href="student-dashboard.html">Daily Hygiene Photos</a></li>
+            <li><a href="student-dashboard.html">Advance Leave Alerts</a></li>
+            <li><a href="chat.html">Direct Cook Chat</a></li>
+            <li><a href="student-dashboard.html">Student Meal Reviews</a></li>
           </ul>
         </div>
       </div>
       <div class="footer-bottom">
-        <p>© 2026 CEP Tiffin Services Team | Pune, Maharashtra | Built with HTML, CSS, JavaScript, FastAPI & PostgreSQL</p>
+        <p>© 2026 CEP Tiffin Services Team | Pune, Maharashtra | Khane Ki Khoj</p>
       </div>
     </div>
   </footer>
 
   <script src="js/api.js"></script>
   <script>
-    // Quick load featured providers on landing page
     document.addEventListener("DOMContentLoaded", async () => {
       try {
         const providers = await apiGet("/api/providers");
         const grid = document.getElementById("featured-providers-grid");
         if (!grid || !providers) return;
 
-        grid.innerHTML = providers.slice(0, 3).map(p => `
-          <div class="provider-card">
-            <div class="provider-card-img-wrap">
-              <img src="${p.profile_image || 'https://images.unsplash.com/photo-1546833999-b9f581a1996d?w=600'}" alt="${p.service_name}" class="provider-card-img">
-              <span class="provider-status-badge ${p.is_available ? 'status-available' : 'status-unavailable'}">
-                ${p.is_available ? '✅ Available' : '⚠️ On Leave'}
-              </span>
-              ${p.today_hygiene_image ? '<div class="provider-hygiene-tag">🧼 Daily Hygiene Proof</div>' : ''}
-            </div>
-            <div class="provider-card-body">
-              <div style="display:flex; justify-content:space-between; align-items:flex-start; margin-bottom:4px;">
-                <h3 class="provider-card-title">${p.service_name}</h3>
-                <span class="badge badge-rating">⭐ ${p.average_rating > 0 ? p.average_rating : 'New'}</span>
+        grid.innerHTML = providers.slice(0, 4).map(p => {
+          const isAvail = p.is_available;
+          const statusClass = isAvail ? "status-available" : "status-unavailable";
+          const statusText = isAvail ? "🟢 Available" : "🔴 On Leave";
+          const imgUrl = p.profile_image || "https://images.unsplash.com/photo-1546833999-b9f581a1996d?w=600";
+
+          return `
+            <div class="provider-card">
+              <div class="provider-card-img-wrap">
+                <img src="${imgUrl}" alt="${p.service_name}" class="provider-card-img">
+                <span class="provider-status-badge ${statusClass}">${statusText}</span>
+                ${p.today_hygiene_image ? '<div class="provider-hygiene-tag">🧼 Daily Hygiene</div>' : ''}
               </div>
-              <div class="provider-card-area">📍 ${p.area}</div>
-              <p style="font-size:13px; color:var(--dark-muted); margin-bottom:12px;">
-                ${p.description ? p.description.slice(0, 90) + '...' : ''}
-              </p>
-              <div class="provider-card-footer">
-                <div class="price-tag">₹<strong>${p.single_meal_price}</strong> / meal</div>
-                <a href="provider-profile.html?id=${p.id}" class="btn btn-primary btn-sm">View Menu</a>
+              <div class="provider-card-body">
+                <div style="display:flex; justify-content:space-between; align-items:flex-start; margin-bottom:4px;">
+                  <h3 class="provider-card-title">${p.service_name}</h3>
+                  <span class="badge badge-rating">⭐ ${p.average_rating > 0 ? p.average_rating : '4.8'}</span>
+                </div>
+                <div class="provider-card-area">📍 ${p.area}</div>
+                <div class="provider-card-badges">
+                  <span class="badge ${p.food_type.includes('Veg') ? 'badge-veg' : 'badge-nonveg'}">${p.food_type}</span>
+                  ${p.delivery_available ? '<span class="badge badge-pill-soft">🛵 Delivery</span>' : ''}
+                </div>
+                <div class="provider-card-footer">
+                  <div class="price-tag">From <strong>₹${p.single_meal_price}</strong> / meal</div>
+                  <div style="display:flex; gap:6px;">
+                    <a href="provider-profile.html?id=${p.id}" class="btn btn-primary btn-sm">View Profile</a>
+                  </div>
+                </div>
               </div>
             </div>
-          </div>
-        `).join("");
+          `;
+        }).join("");
       } catch (err) {
-        console.error(err);
+        console.error("Could not load featured providers:", err);
       }
     });
   </script>

@@ -1,6 +1,6 @@
-from datetime import datetime, date
+from datetime import datetime, date, timezone
 from typing import Optional, List
-from pydantic import BaseModel, EmailStr, Field
+from pydantic import BaseModel, EmailStr, Field, field_validator
 
 
 # ---------------- Auth & User Schemas ----------------
@@ -287,6 +287,13 @@ class NotificationOut(BaseModel):
     is_read: bool
     link_url: Optional[str]
     created_at: datetime
+
+    @field_validator("created_at", mode="after")
+    @classmethod
+    def ensure_utc(cls, v: datetime) -> datetime:
+        if v is not None and v.tzinfo is None:
+            return v.replace(tzinfo=timezone.utc)
+        return v
 
     class Config:
         from_attributes = True

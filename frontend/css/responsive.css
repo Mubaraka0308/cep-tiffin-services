@@ -1,137 +1,241 @@
 /* ==========================================================================
-   Khane ki Khoj - Tiffin Services
-   Responsive Stylesheet
+   Khane Ki Khoj - Tiffin Services
+   Responsive Stylesheet (Mobile, Tablet & Desktop)
    ========================================================================== */
 
+/* Large Tablets & Small Laptops */
 @media (max-width: 1024px) {
   .hero-title {
-    font-size: 34px;
+    font-size: 38px;
   }
+
+  .features-grid-4 {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .student-extras-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .cta-banner-wrapper {
+    grid-template-columns: 1fr;
+    padding: 32px;
+  }
+
+  .cta-banner-image {
+    height: 180px;
+  }
+
   .hygiene-display-box {
     grid-template-columns: 1fr;
   }
+
   .chat-container {
-    height: 580px;
+    grid-template-columns: 280px 1fr;
+    height: calc(100vh - 72px - 54px - 36px);
+    min-height: 480px;
   }
 }
 
+/* Tablets & Large Phones */
 @media (max-width: 768px) {
   .navbar .nav-container {
     height: auto;
-    padding: 14px 20px;
+    padding: 12px 16px;
     flex-wrap: wrap;
-    gap: 14px;
+    gap: 12px;
   }
 
   .nav-links {
     order: 3;
     width: 100%;
-    justify-content: space-around;
-    padding-top: 10px;
-    border-top: 1px solid var(--border-light);
+    justify-content: flex-start;
+    gap: 12px;
+    overflow-x: auto;
+    padding: 8px 0;
+    border-top: 1px solid var(--border-subtle);
   }
 
   .nav-actions {
     margin-left: auto;
   }
 
-  .hero {
-    padding: 40px 0 30px;
+  .hero-grid {
+    grid-template-columns: 1fr;
+    gap: 36px;
   }
 
   .hero-title {
-    font-size: 28px;
+    font-size: 32px;
   }
 
-  .hero-subtitle {
-    font-size: 15px;
+  .hero-image-container {
+    max-width: 320px;
+    margin: 0 auto;
   }
 
-  .hero-search-box {
-    flex-direction: column;
-    padding: 12px;
+  .features-grid-4 {
+    grid-template-columns: 1fr;
   }
 
-  .hero-search-box .btn {
-    width: 100%;
+  .how-it-works-grid {
+    grid-template-columns: 1fr;
+    gap: 16px;
   }
 
-  .hero-stats {
-    gap: 20px;
+  /* Auth split screen stacks on mobile */
+  .auth-split-card {
+    grid-template-columns: 1fr;
   }
 
-  .stat-number {
-    font-size: 22px;
+  .auth-split-image {
+    min-height: 220px;
   }
 
-  .section {
-    padding: 40px 0;
+  .auth-form-column {
+    padding: 32px 24px;
   }
 
-  .section-title {
-    font-size: 24px;
+  .chat-page-wrapper {
+    padding: 12px 0 20px;
+    flex: none;
+    min-height: auto;
   }
 
-  .ad-banner-card {
-    flex-direction: column;
-    text-align: center;
-  }
-
+  /* Chat stacks on mobile */
   .chat-container {
     grid-template-columns: 1fr;
     height: auto;
+    max-height: none;
+    min-height: 0;
   }
 
   .chat-sidebar {
-    height: 200px;
+    height: 180px;
     border-right: none;
-    border-bottom: 1px solid var(--border);
+    border-bottom: 1.5px solid var(--border-warm);
+    display: flex;
+    flex-direction: column;
+    min-height: 0;
+    overflow: hidden;
+  }
+
+  .chat-sidebar-header {
+    flex-shrink: 0;
+    padding: 12px 16px;
+  }
+
+  .chat-conversations-list {
+    flex: 1;
+    min-height: 0;
+    overflow-y: auto;
+    overflow-x: hidden;
   }
 
   .chat-main {
-    height: 480px;
-  }
-
-  .footer-content {
-    grid-template-columns: 1fr;
-    gap: 24px;
-  }
-
-  .dashboard-header {
+    height: 520px;
+    max-height: 70vh;
+    display: flex;
     flex-direction: column;
-    align-items: flex-start;
+    min-height: 0;
+    overflow: hidden;
+  }
+
+  .chat-header {
+    flex-shrink: 0;
+    padding: 12px 16px;
+  }
+
+  .chat-messages {
+    flex: 1;
+    min-height: 0;
+    overflow-y: auto;
+    overflow-x: hidden;
+    padding: 16px;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .chat-input-bar {
+    flex-shrink: 0;
+    padding: 12px 14px;
   }
 
   .filter-bar {
     flex-direction: column;
     align-items: stretch;
+    padding: 16px;
   }
 
   .filter-group {
     width: 100%;
+    min-width: 100%;
+  }
+
+  .footer-content {
+    grid-template-columns: 1fr;
+    gap: 28px;
   }
 
   .notifications-dropdown {
-    width: 300px;
-    right: -50px;
+    width: 290px;
+    right: -40px;
   }
 }
 
+/* Small Phones */
 @media (max-width: 480px) {
   .hero-title {
-    font-size: 24px;
+    font-size: 26px;
   }
 
-  .stat-card {
-    padding: 16px;
-  }
-
-  .btn-lg {
+  .hero-btn-group {
+    flex-direction: column;
     width: 100%;
+  }
+
+  .hero-btn-group .btn {
+    width: 100%;
+  }
+
+  .floating-badge {
+    top: 6px;
+    right: 6px;
+    padding: 6px 12px;
+  }
+
+  .cta-banner-wrapper {
+    padding: 24px 18px;
+  }
+
+  .cta-banner-content h2 {
+    font-size: 22px;
+  }
+
+  .role-cards-container {
+    grid-template-columns: 1fr;
+  }
+
+  .stats-grid {
+    grid-template-columns: 1fr;
   }
 
   .data-table {
     display: block;
     overflow-x: auto;
+    white-space: nowrap;
+  }
+
+  .chat-sidebar {
+    height: 140px;
+  }
+
+  .chat-main {
+    height: 440px;
+    max-height: 65vh;
+  }
+
+  .message-bubble {
+    max-width: 86%;
+    font-size: 13px;
   }
 }

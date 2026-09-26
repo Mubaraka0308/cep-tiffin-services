@@ -47,22 +47,33 @@ async function loadAdvertisementsBanner() {
       return;
     }
 
-    const featuredAd = ads[0]; // Display the top current promo
-    adBannerContainer.innerHTML = `
-      <div class="ad-banner-card">
-        <div class="ad-banner-info">
-          <span class="badge" style="background:#ea580c; color:#fff; margin-bottom:8px; display:inline-block;">📢 Featured Promotion</span>
-          <h3>${featuredAd.title}</h3>
-          <p>${featuredAd.description}</p>
-          <div style="margin-top:10px; font-size:12px; color:#9a3412;">
-            Offered by: <strong>${featuredAd.provider_name}</strong>
+    let offersHtml = `
+      <div class="content-section-header" style="margin-top: 10px;">
+        <h3 class="content-section-title">Today's Offers & Announcements</h3>
+        <span style="font-size: 13px; color: var(--text-muted);">Special student meal discounts</span>
+      </div>
+      <div class="offers-grid">
+    `;
+
+    offersHtml += ads.map(a => `
+      <div class="offer-card">
+        <div style="font-size: 28px;">🏷️</div>
+        <div style="flex:1;">
+          <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:2px;">
+            <span class="offer-badge">${a.banner_type || 'Special'}</span>
+            <span style="font-size:11px; color:var(--text-light);">${a.valid_until ? 'Valid till ' + a.valid_until : 'Limited Time'}</span>
+          </div>
+          <strong style="font-size:14px; color:var(--text-main); display:block; margin:2px 0;">${a.title}</strong>
+          <p style="font-size:12px; color:var(--text-muted); line-height:1.35;">${a.description}</p>
+          <div style="margin-top:6px;">
+            <a href="/provider-profile.html?id=${a.provider_id}" class="btn btn-secondary btn-sm" style="padding:3px 10px; font-size:11px;">View Menu</a>
           </div>
         </div>
-        <div>
-          <a href="/provider-profile.html?id=${featuredAd.provider_id}" class="btn btn-primary btn-sm">View Offer & Menu</a>
-        </div>
       </div>
-    `;
+    `).join("");
+
+    offersHtml += `</div>`;
+    adBannerContainer.innerHTML = offersHtml;
     adBannerContainer.style.display = "block";
   } catch (err) {
     console.error("Failed to load advertisements:", err);
@@ -111,7 +122,7 @@ function renderProviders(providers) {
   grid.innerHTML = providers.map(p => {
     const isAvail = p.is_available;
     const statusClass = isAvail ? "status-available" : "status-unavailable";
-    const statusText = isAvail ? "✅ Available Today" : "⚠️ Currently Unavailable";
+    const statusText = isAvail ? "🟢 Available" : "🔴 On Leave";
     const defaultImg = "https://images.unsplash.com/photo-1546833999-b9f581a1996d?w=600&auto=format&fit=crop&q=80";
     const profileImg = p.profile_image || defaultImg;
 
@@ -120,7 +131,7 @@ function renderProviders(providers) {
     if (!isAvail && p.leave_notice) {
       leaveBox = `
         <div class="provider-leave-alert-box">
-          📢 <strong>Advance Leave Notice:</strong> ${p.leave_notice}
+          📢 <strong>Advance Notice:</strong> ${p.leave_notice}
         </div>
       `;
     }
@@ -128,7 +139,7 @@ function renderProviders(providers) {
     // Daily hygiene indicator
     let hygieneTag = "";
     if (p.today_hygiene_image) {
-      hygieneTag = `<div class="provider-hygiene-tag">🧼 Daily Hygiene Proof Posted</div>`;
+      hygieneTag = `<div class="provider-hygiene-tag">🧼 Daily Hygiene</div>`;
     }
 
     return `
@@ -141,18 +152,18 @@ function renderProviders(providers) {
         <div class="provider-card-body">
           <div style="display:flex; justify-content:space-between; align-items:flex-start; margin-bottom:4px;">
             <h3 class="provider-card-title">${p.service_name}</h3>
-            <span class="badge badge-rating">⭐ ${p.average_rating > 0 ? p.average_rating : 'New'} (${p.rating_count})</span>
+            <span class="badge badge-rating">⭐ ${p.average_rating > 0 ? p.average_rating : '4.8'} (${p.rating_count || 0})</span>
           </div>
           <div class="provider-card-area">📍 ${p.area}</div>
 
           <div class="provider-card-badges">
             <span class="badge ${p.food_type.includes('Veg') ? 'badge-veg' : 'badge-nonveg'}">${p.food_type}</span>
-            <span class="badge" style="background:#e0f2fe; color:#0369a1;">👥 ${p.active_customer_count} Active Students</span>
-            ${p.delivery_available ? '<span class="badge" style="background:#fef3c7; color:#92400e;">🛵 Delivery</span>' : ''}
+            <span class="badge badge-pill-soft">👥 ${p.active_customer_count} Students</span>
+            ${p.delivery_available ? '<span class="badge badge-pill-soft">🛵 Delivery</span>' : ''}
           </div>
 
-          <p style="font-size:13px; color:var(--dark-muted); margin-bottom:12px; line-height:1.4;">
-            ${p.description ? p.description.slice(0, 100) + '...' : 'Wholesome student meals delivered fresh daily.'}
+          <p style="font-size:13px; color:var(--text-muted); margin-bottom:12px; line-height:1.45;">
+            ${p.description ? p.description.slice(0, 95) + '...' : 'Wholesome student meals delivered fresh daily.'}
           </p>
 
           ${leaveBox}
@@ -160,10 +171,10 @@ function renderProviders(providers) {
           <div class="provider-card-footer">
             <div class="price-tag">
               From <strong>₹${p.single_meal_price}</strong> / meal
-              <div style="font-size:11px; color:var(--dark-muted);">₹${p.monthly_price}/month</div>
+              <div style="font-size:11px; color:var(--text-light);">₹${p.monthly_price}/month</div>
             </div>
             <div style="display:flex; gap:6px;">
-              <button class="btn btn-outline btn-sm" onclick="startDirectChat(${p.id})">💬 Chat</button>
+              <button class="btn btn-secondary btn-sm" onclick="startDirectChat(${p.id})">💬 Chat</button>
               <a href="/provider-profile.html?id=${p.id}" class="btn btn-primary btn-sm">View Profile</a>
             </div>
           </div>

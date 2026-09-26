@@ -120,9 +120,12 @@ function updateNavigation() {
 
   if (user) {
     const dashboardUrl = user.role === "provider" ? "/provider-dashboard.html" : "/student-dashboard.html";
+    const initial = (user.full_name || user.username || "U").charAt(0).toUpperCase();
+    const firstName = (user.full_name || user.username || "User").split(" ")[0];
+
     navActions.innerHTML = `
       <div style="position: relative;">
-        <button class="notification-bell-btn" id="bell-btn" title="Notifications">
+        <button class="notification-bell-btn" id="bell-btn" title="Notifications & Alerts">
           🔔
           <span class="notification-badge" id="notif-badge" style="display:none;">0</span>
         </button>
@@ -132,18 +135,22 @@ function updateNavigation() {
             <button class="btn btn-sm btn-outline" id="mark-all-read-btn" style="padding:2px 8px; font-size:11px;">Mark Read</button>
           </div>
           <div id="notif-list">
-            <div style="padding:16px; text-align:center; color:var(--dark-muted); font-size:13px;">No new alerts</div>
+            <div style="padding:16px; text-align:center; color:var(--text-muted); font-size:13px;">No new alerts</div>
           </div>
         </div>
       </div>
-      <a href="/chat.html" class="btn btn-outline btn-sm" title="Messages">💬 Chat</a>
-      <button class="btn btn-danger btn-sm" onclick="handleLogout()">Logout</button>
+      <a href="/chat.html" class="btn btn-secondary btn-sm" title="Messages">💬 Chat</a>
+      <a href="${dashboardUrl}" class="user-nav-pill" title="${user.role === 'provider' ? 'Kitchen Profile' : 'Student Profile'}">
+        <span class="user-nav-avatar">${initial}</span>
+        <span>${firstName}</span>
+      </a>
+      <button class="btn btn-outline btn-sm" onclick="handleLogout()" title="Sign Out">Logout</button>
     `;
 
     setupNotificationSystem();
   } else {
     navActions.innerHTML = `
-      <a href="/login.html" class="btn btn-outline btn-sm">Login</a>
+      <a href="/login.html" class="btn btn-secondary btn-sm">Login</a>
       <a href="/register.html" class="btn btn-primary btn-sm">Sign Up</a>
     `;
   }
@@ -202,6 +209,47 @@ async function loadNotificationsBadge() {
   } catch (e) {}
 }
 
+/**
+ * Format a UTC timestamp string to Asia/Kolkata (IST) local time for notifications.
+ * Handles naive ISO strings (no Z suffix) by treating them as UTC.
+ */
+function formatNotificationTimestamp(dateInput) {
+  if (!dateInput) return '';
+  let str = typeof dateInput === 'string' ? dateInput.trim() : String(dateInput);
+  // If no timezone info present, treat as UTC by appending Z
+  if (!str.endsWith('Z') && !/[+-]\d{2}(:?\d{2})?$/.test(str)) {
+    str += 'Z';
+  }
+  const date = new Date(str);
+  if (isNaN(date.getTime())) return '';
+
+  const timeFormatter = new Intl.DateTimeFormat('en-US', {
+    timeZone: 'Asia/Kolkata',
+    hour: '2-digit',
+    minute: '2-digit',
+    hour12: true
+  });
+
+  const dateFormatter = new Intl.DateTimeFormat('en-US', {
+    timeZone: 'Asia/Kolkata',
+    month: 'short',
+    day: 'numeric'
+  });
+
+  const toDateKey = (d) => new Intl.DateTimeFormat('en-US', {
+    timeZone: 'Asia/Kolkata',
+    year: 'numeric',
+    month: '2-digit',
+    day: '2-digit'
+  }).format(d);
+
+  const now = new Date();
+  if (toDateKey(date) === toDateKey(now)) {
+    return `Today, ${timeFormatter.format(date)}`;
+  }
+  return `${dateFormatter.format(date)}, ${timeFormatter.format(date)}`;
+}
+
 async function loadNotificationsList() {
   try {
     const list = await apiGet("/api/notifications");
@@ -217,7 +265,7 @@ async function loadNotificationsList() {
       <div class="notif-item ${item.is_read ? '' : 'unread'}">
         <div class="notif-title">${item.title}</div>
         <div>${item.message}</div>
-        <div class="notif-time">${new Date(item.created_at).toLocaleTimeString([], {hour: '2-digit', minute:'2-digit', month: 'short', day: 'numeric'})}</div>
+        <div class="notif-time">${formatNotificationTimestamp(item.created_at)}</div>
       </div>
     `).join("");
   } catch (e) {

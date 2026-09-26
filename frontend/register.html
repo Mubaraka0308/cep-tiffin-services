@@ -3,49 +3,19 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Sign Up | Khane ki Khoj - Tiffin Services</title>
+  <title>Sign Up | Khane Ki Khoj</title>
   <link rel="stylesheet" href="css/style.css">
   <link rel="stylesheet" href="css/dashboard.css">
   <link rel="stylesheet" href="css/responsive.css">
   <style>
-    .auth-container {
-      min-height: calc(100vh - 144px);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      padding: 40px 20px;
-    }
-    .auth-card {
-      background: #ffffff;
-      border-radius: var(--radius-md);
-      border: 1px solid var(--border);
-      box-shadow: var(--shadow-md);
+    .reg-card {
       width: 100%;
-      max-width: 520px;
-      padding: 36px 32px;
-    }
-    .role-selector {
-      display: flex;
-      gap: 12px;
-      margin-bottom: 24px;
-    }
-    .role-option {
-      flex: 1;
-      border: 2px solid var(--border);
-      border-radius: var(--radius-sm);
-      padding: 14px;
-      text-align: center;
-      cursor: pointer;
-      transition: all 0.2s ease;
-    }
-    .role-option input {
-      display: none;
-    }
-    .role-option.selected {
-      border-color: var(--primary);
-      background: var(--primary-soft);
-      font-weight: 700;
-      color: var(--primary-dark);
+      max-width: 640px;
+      background: var(--bg-surface);
+      border: 1px solid var(--border-warm);
+      border-radius: var(--radius-lg);
+      padding: 40px 36px;
+      box-shadow: var(--shadow-lg);
     }
   </style>
 </head>
@@ -55,38 +25,46 @@
   <header class="navbar">
     <div class="container nav-container">
       <a href="index.html" class="brand">
-        <div class="brand-icon">🍲</div>
+        <div class="brand-icon-box">🍱</div>
         <div class="brand-text">
-          <h1>Khane ki Khoj</h1>
-          <span>Tiffin Services • Pune</span>
+          <h1>Khane Ki Khoj</h1>
+          <span>Home-Style Tiffin Services</span>
         </div>
       </a>
+      <ul class="nav-links">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="student-dashboard.html">Browse Tiffins</a></li>
+      </ul>
       <div class="nav-actions" id="nav-actions">
-        <a href="login.html" class="btn btn-outline btn-sm">Login</a>
+        <a href="login.html" class="btn btn-secondary btn-sm">Login</a>
       </div>
     </div>
   </header>
 
   <!-- Register Main -->
-  <main class="auth-container">
-    <div class="auth-card">
-      <div style="text-align: center; margin-bottom: 24px;">
-        <div style="font-size: 36px; margin-bottom: 6px;">📝</div>
-        <h2 style="font-size: 24px; font-weight: 800; color: var(--dark);">Create Your Account</h2>
-        <p style="font-size: 14px; color: var(--dark-muted);">Join Khane ki Khoj as a student or tiffin provider</p>
+  <main class="auth-page-wrapper">
+    <div class="reg-card">
+      <div class="auth-header" style="text-align: center; margin-bottom: 24px;">
+        <h2>Join Khane Ki Khoj</h2>
+        <p>Choose your role and start your journey.</p>
       </div>
 
-      <!-- Role Selection -->
-      <div class="role-selector">
-        <label class="role-option selected" id="label-student">
+      <!-- Role Selection Cards from Figma Reference -->
+      <div class="role-cards-container">
+        <!-- Student Option -->
+        <label class="role-card-option selected" id="label-student">
           <input type="radio" name="role" id="role-student" value="student" checked>
-          <div style="font-size: 20px;">🎓</div>
-          <div>Student / Customer</div>
+          <div class="role-card-avatar">🎓</div>
+          <div class="role-card-title">Student</div>
+          <div class="role-card-desc">Find and subscribe to local tiffin services.</div>
         </label>
-        <label class="role-option" id="label-provider">
+
+        <!-- Provider Option -->
+        <label class="role-card-option" id="label-provider">
           <input type="radio" name="role" id="role-provider" value="provider">
-          <div style="font-size: 20px;">🍲</div>
-          <div>Tiffin Provider / Mess</div>
+          <div class="role-card-avatar">🧑‍🍳</div>
+          <div class="role-card-title">Provider</div>
+          <div class="role-card-desc">Share your homemade meals with students.</div>
         </label>
       </div>
 
@@ -115,13 +93,13 @@
         </div>
 
         <!-- Dynamic Student Fields -->
-        <div id="student-fields" style="background: #fafaf9; padding: 14px; border-radius: var(--radius-sm); border: 1px solid var(--border); margin-bottom: 14px;">
-          <h4 style="font-size: 13px; color: var(--dark-muted); text-transform: uppercase; margin-bottom: 10px;">Student Information</h4>
-          <div class="filter-group" style="margin-bottom: 10px;">
+        <div id="student-fields" style="background: var(--bg-subtle); padding: 18px; border-radius: var(--radius-sm); border: 1px solid var(--border-warm); margin-bottom: 16px;">
+          <h4 style="font-size: 12px; color: var(--accent-green-dark); text-transform: uppercase; letter-spacing: 0.5px; font-weight: 800; margin-bottom: 12px;">Student Details</h4>
+          <div class="filter-group" style="margin-bottom: 12px;">
             <label for="reg-college">College / University Name</label>
-            <input type="text" id="reg-college" class="form-control" placeholder="e.g. PIET / Pune University">
+            <input type="text" id="reg-college" class="form-control" placeholder="e.g. PIET / MIT Pune / Bharati Vidyapeeth">
           </div>
-          <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px;">
+          <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 12px;">
             <div class="filter-group">
               <label for="reg-area">Hostel / Staying Area</label>
               <select id="reg-area" class="form-control">
@@ -144,13 +122,13 @@
         </div>
 
         <!-- Dynamic Provider Fields -->
-        <div id="provider-fields" style="display: none; background: #fff8f0; padding: 14px; border-radius: var(--radius-sm); border: 1px solid #fed7aa; margin-bottom: 14px;">
-          <h4 style="font-size: 13px; color: #9a3412; text-transform: uppercase; margin-bottom: 10px;">Tiffin Business Details</h4>
-          <div class="filter-group" style="margin-bottom: 10px;">
-            <label for="reg-service-name">Tiffin / Mess Service Name</label>
+        <div id="provider-fields" style="display: none; background: var(--bg-subtle); padding: 18px; border-radius: var(--radius-sm); border: 1px solid var(--border-warm); margin-bottom: 16px;">
+          <h4 style="font-size: 12px; color: #9A3412; text-transform: uppercase; letter-spacing: 0.5px; font-weight: 800; margin-bottom: 12px;">Tiffin Service Details</h4>
+          <div class="filter-group" style="margin-bottom: 12px;">
+            <label for="reg-service-name">Service / Mess Name</label>
             <input type="text" id="reg-service-name" class="form-control" placeholder="e.g. Annapurna Tiffin Services">
           </div>
-          <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 10px;">
+          <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 12px;">
             <div class="filter-group">
               <label for="reg-provider-area">Operating Area (Pune)</label>
               <input type="text" id="reg-provider-area" class="form-control" placeholder="e.g. Dhankawadi, Pune">
@@ -164,9 +142,9 @@
               </select>
             </div>
           </div>
-          <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px;">
+          <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 12px;">
             <div class="filter-group">
-              <label for="reg-meal-price">Single Meal Price (₹)</label>
+              <label for="reg-meal-price">Single Meal (₹)</label>
               <input type="number" id="reg-meal-price" class="form-control" value="80" min="40" max="250">
             </div>
             <div class="filter-group">
@@ -183,17 +161,17 @@
           </div>
           <div class="filter-group">
             <label for="reg-confirm-password">Confirm Password</label>
-            <input type="password" id="reg-confirm-password" class="form-control" placeholder="Re-enter password" required>
+            <input type="password" id="reg-confirm-password" class="form-control" placeholder="Repeat password" required>
           </div>
         </div>
 
         <button type="submit" class="btn btn-primary" style="width: 100%; padding: 12px; font-size: 15px;">
-          Create Account
+          Register
         </button>
       </form>
 
-      <div style="text-align: center; margin-top: 20px; font-size: 14px; color: var(--dark-muted);">
-        Already have an account? <a href="login.html" style="font-weight: 600;">Login now</a>
+      <div style="text-align: center; margin-top: 24px; font-size: 14px; color: var(--text-muted);">
+        Already have an account? <a href="login.html" style="font-weight: 700; color: var(--accent-green);">Login</a>
       </div>
     </div>
   </main>
@@ -201,7 +179,7 @@
   <script src="js/api.js"></script>
   <script src="js/auth.js"></script>
   <script>
-    // Handle visual highlight on role selection
+    // Role selection highlight toggle
     const rStudent = document.getElementById("role-student");
     const rProvider = document.getElementById("role-provider");
     const lblStudent = document.getElementById("label-student");
@@ -220,7 +198,7 @@
     rStudent.addEventListener("change", syncRoleUI);
     rProvider.addEventListener("change", syncRoleUI);
 
-    // Preselect role if passed in query param
+    // Preselect role if query param role=provider
     const params = new URLSearchParams(window.location.search);
     if (params.get("role") === "provider") {
       rProvider.checked = true;

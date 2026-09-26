@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Student Dashboard | Khane ki Khoj - Tiffin Services</title>
+  <title>Student Portal | Khane Ki Khoj</title>
   <link rel="stylesheet" href="css/style.css">
   <link rel="stylesheet" href="css/dashboard.css">
   <link rel="stylesheet" href="css/responsive.css">
@@ -14,48 +14,45 @@
   <header class="navbar">
     <div class="container nav-container">
       <a href="index.html" class="brand">
-        <div class="brand-icon">🍲</div>
+        <div class="brand-icon-box">🍱</div>
         <div class="brand-text">
-          <h1>Khane ki Khoj</h1>
-          <span>Student Portal • Pune</span>
+          <h1>Khane Ki Khoj</h1>
+          <span>Home-Style Tiffin Services</span>
         </div>
       </a>
 
       <ul class="nav-links">
+        <li><a href="index.html">Home</a></li>
         <li><a href="student-dashboard.html" class="active">Browse Tiffins</a></li>
-        <li><a href="chat.html">Messages</a></li>
       </ul>
 
       <div class="nav-actions" id="nav-actions">
-        <!-- Rendered dynamically by api.js -->
+        <!-- Injected dynamically by api.js -->
       </div>
     </div>
   </header>
 
   <!-- Student Dashboard Main -->
   <main class="container dashboard-wrapper">
-    <!-- Header Greeting -->
+    <!-- Friendly Greeting from Figma Reference -->
     <div class="dashboard-header">
       <div class="dashboard-title">
-        <h2>Namaste, <span id="student-greeting-name">Student</span>! 👋</h2>
-        <p>Explore verified home-cooked tiffins, check daily kitchen hygiene proofs, and receive instant leave alerts.</p>
+        <h2>Good morning, <span id="student-greeting-name">Student</span>! 👋</h2>
+        <p>Find something that feels like home.</p>
       </div>
     </div>
 
-    <!-- Active Advertisements Banner -->
-    <section id="ad-banner-section" style="display: none;"></section>
-
-    <!-- Search & Filter Controls -->
+    <!-- Search & Filter Bar from Figma Reference -->
     <section class="filter-bar">
-      <div class="filter-group" style="flex: 2;">
+      <div class="filter-group" style="flex: 2.2;">
         <label for="search-input">Search Tiffins</label>
-        <input type="text" id="search-input" class="form-control" placeholder="Search by name, area (Dhankawadi), or thali type...">
+        <input type="text" id="search-input" class="form-control" placeholder="Search by name, area (Dhankawadi, Katraj), or cuisine...">
       </div>
 
       <div class="filter-group">
-        <label for="filter-area">Pune Area</label>
+        <label for="filter-area">Area</label>
         <select id="filter-area" class="form-control">
-          <option value="all">All Pune Areas</option>
+          <option value="all">All Areas</option>
           <option value="Dhankawadi">Dhankawadi</option>
           <option value="Sarita Vihar">Sarita Vihar</option>
           <option value="Katraj">Katraj</option>
@@ -74,23 +71,31 @@
       </div>
 
       <div class="filter-group">
-        <label for="filter-max-price">Max Meal: <span id="price-display">₹150</span></label>
+        <label for="filter-max-price">Max: <span id="price-display">₹150</span></label>
         <input type="range" id="filter-max-price" min="50" max="200" step="5" value="150" class="form-control" style="padding: 0;">
       </div>
 
-      <div style="display:flex; align-items:center; gap:12px; margin-top:14px;">
+      <div style="display:flex; align-items:center; gap:10px; margin-bottom: 2px;">
         <label class="filter-toggle">
           <input type="checkbox" id="filter-available-only">
-          <span>Available Today Only</span>
+          <span>Available Only</span>
         </label>
-        <button id="reset-filters-btn" class="btn btn-outline btn-sm">Reset</button>
+        <button id="reset-filters-btn" class="btn btn-secondary btn-sm">Reset</button>
       </div>
     </section>
 
-    <!-- Providers Grid -->
+    <!-- Today's Offers & Advertisements Banner from Figma Reference -->
+    <section id="ad-banner-section" style="display: none;"></section>
+
+    <!-- Recommended for You (Providers Grid) -->
+    <div class="content-section-header">
+      <h3 class="content-section-title">Recommended for You</h3>
+      <span style="font-size: 13px; color: var(--text-muted);">Verified local tiffin providers</span>
+    </div>
+
     <div id="providers-loading" style="text-align: center; padding: 40px; display: none;">
       <div style="font-size: 28px; margin-bottom: 8px;">🍲</div>
-      <p style="color: var(--dark-muted);">Loading tiffin providers across Pune...</p>
+      <p style="color: var(--text-muted);">Finding kitchens near you...</p>
     </div>
 
     <div class="providers-grid" id="providers-grid">
@@ -99,13 +104,64 @@
 
     <!-- Empty State -->
     <div id="no-providers-found" style="display: none; text-align: center; padding: 60px 20px;">
-      <div style="font-size: 48px; margin-bottom: 12px;">🔍</div>
-      <h3 style="font-size: 20px; font-weight: 700; color: var(--dark);">No Tiffin Providers Found</h3>
-      <p style="color: var(--dark-muted); margin-top: 6px;">Try adjusting your search criteria or price filters.</p>
+      <div style="font-size: 44px; margin-bottom: 12px;">🔍</div>
+      <h3 style="font-size: 18px; font-weight: 800; color: var(--text-main);">No Tiffin Providers Found</h3>
+      <p style="color: var(--text-muted); margin-top: 4px;">Try loosening your filters or searching another area.</p>
+    </div>
+
+    <!-- "Your Tiffin" & "Recent Activity" Sections from Figma Reference -->
+    <div class="student-extras-grid">
+      <!-- Your Tiffin Active Card -->
+      <div class="student-card-box">
+        <h3>🍱 Your Tiffin</h3>
+        <div id="student-active-subscription-wrap">
+          <div class="active-tiffin-item">
+            <div class="active-tiffin-icon">🥘</div>
+            <div style="flex: 1;">
+              <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 4px;">
+                <strong style="font-size: 15px; color: var(--text-main);" id="sub-card-provider">Annapurna Tiffin Services</strong>
+                <span class="badge badge-avail-online">Active Plan</span>
+              </div>
+              <div style="font-size: 13px; color: var(--text-muted);">Monthly Lunch & Dinner • ₹2,400/month</div>
+              <div style="font-size: 12px; color: var(--accent-green-dark); margin-top: 4px; font-weight: 600;">
+                Next Delivery: Today • 12:30 PM (Hostel Gate)
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Recent Activity Section -->
+      <div class="student-card-box">
+        <h3>🕒 Recent Activity</h3>
+        <div class="activity-list" id="student-activity-list">
+          <div class="activity-item">
+            <span class="activity-icon">💬</span>
+            <div style="flex:1;">
+              <div><strong>New message from cook:</strong> "Dal and hot rotis dispatched for lunch."</div>
+              <div style="font-size:11px; color:var(--text-light); margin-top:2px;">15 mins ago</div>
+            </div>
+          </div>
+          <div class="activity-item">
+            <span class="activity-icon">🧼</span>
+            <div style="flex:1;">
+              <div><strong>Hygiene photo verified:</strong> Annapurna Tiffin updated kitchen cleanliness proof.</div>
+              <div style="font-size:11px; color:var(--text-light); margin-top:2px;">Today, 8:15 AM</div>
+            </div>
+          </div>
+          <div class="activity-item">
+            <span class="activity-icon">📢</span>
+            <div style="flex:1;">
+              <div><strong>Notice:</strong> All providers operating on standard schedule this week.</div>
+              <div style="font-size:11px; color:var(--text-light); margin-top:2px;">Yesterday</div>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
   </main>
 
-  <!-- Tiffin Subscription Modal -->
+  <!-- Subscription Modal -->
   <div class="modal-overlay" id="subscribe-modal">
     <div class="modal-box">
       <div class="modal-header">
@@ -130,7 +186,7 @@
           </div>
         </div>
         <div class="modal-footer">
-          <button type="button" class="btn btn-outline" id="sub-cancel-btn">Cancel</button>
+          <button type="button" class="btn btn-secondary" id="sub-cancel-btn">Cancel</button>
           <button type="submit" class="btn btn-primary">Confirm Subscription</button>
         </div>
       </form>
@@ -140,7 +196,7 @@
   <!-- Footer -->
   <footer class="footer">
     <div class="container footer-bottom">
-      <p>© 2026 CEP Tiffin Services Team | Pune, Maharashtra | Khane ki Khoj</p>
+      <p>© 2026 CEP Tiffin Services Team | Pune, Maharashtra | Khane Ki Khoj</p>
     </div>
   </footer>
 

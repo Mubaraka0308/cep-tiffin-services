@@ -3,45 +3,93 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Tiffin Service Details | Khane ki Khoj</title>
+  <title>Provider Profile | Khane Ki Khoj</title>
   <link rel="stylesheet" href="css/style.css">
   <link rel="stylesheet" href="css/dashboard.css">
   <link rel="stylesheet" href="css/responsive.css">
   <style>
-    .profile-hero {
-      background: #ffffff;
-      border-radius: var(--radius-md);
-      border: 1px solid var(--border);
-      padding: 30px;
-      margin-bottom: 30px;
-      display: grid;
-      grid-template-columns: 240px 1fr auto;
-      gap: 30px;
-      align-items: center;
+    .profile-cover-wrap {
+      height: 240px;
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+      margin-bottom: -60px;
+      border: 1px solid var(--border-warm);
       box-shadow: var(--shadow-sm);
+      position: relative;
     }
-    .profile-avatar-img {
+    .profile-cover-img {
       width: 100%;
-      height: 180px;
+      height: 100%;
       object-fit: cover;
-      border-radius: var(--radius-md);
-      border: 1px solid var(--border);
     }
-    .review-box {
-      background: #fafaf9;
-      border-radius: var(--radius-md);
-      padding: 24px;
-      border: 1px solid var(--border);
-      margin-top: 24px;
+    .profile-header-card {
+      background: var(--bg-surface);
+      border: 1px solid var(--border-warm);
+      border-radius: var(--radius-lg);
+      padding: 32px;
+      margin-bottom: 32px;
+      box-shadow: var(--shadow-md);
+      position: relative;
+      z-index: 2;
+      display: grid;
+      grid-template-columns: 140px 1fr auto;
+      gap: 28px;
+      align-items: center;
     }
-    @media (max-width: 768px) {
-      .profile-hero {
+    .profile-avatar-box {
+      width: 130px;
+      height: 130px;
+      border-radius: var(--radius-md);
+      border: 4px solid var(--bg-surface);
+      overflow: hidden;
+      box-shadow: var(--shadow-md);
+      background: var(--bg-subtle);
+    }
+    .profile-avatar-box img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+    .price-highlight-box {
+      background: var(--bg-subtle);
+      border: 1px solid var(--border-warm);
+      border-radius: var(--radius-md);
+      padding: 18px 24px;
+      text-align: center;
+      min-width: 200px;
+    }
+    .trust-badges-bar {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+      margin-top: 14px;
+    }
+    .trust-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 5px 14px;
+      background: var(--bg-subtle);
+      border: 1px solid var(--border-warm);
+      border-radius: var(--radius-full);
+      font-size: 12px;
+      font-weight: 700;
+      color: var(--accent-green-dark);
+    }
+    @media (max-width: 900px) {
+      .profile-header-card {
         grid-template-columns: 1fr;
         text-align: center;
       }
-      .profile-avatar-img {
-        max-width: 260px;
+      .profile-avatar-box {
         margin: 0 auto;
+      }
+      .price-highlight-box {
+        margin: 0 auto;
+        width: 100%;
+      }
+      .trust-badges-bar {
+        justify-content: center;
       }
     }
   </style>
@@ -52,164 +100,218 @@
   <header class="navbar">
     <div class="container nav-container">
       <a href="index.html" class="brand">
-        <div class="brand-icon">🍲</div>
+        <div class="brand-icon-box">🍱</div>
         <div class="brand-text">
-          <h1>Khane ki Khoj</h1>
-          <span>Tiffin Services • Pune</span>
+          <h1>Khane Ki Khoj</h1>
+          <span>Home-Style Tiffin Services</span>
         </div>
       </a>
+
       <ul class="nav-links">
-        <li><a href="student-dashboard.html">← Back to All Tiffins</a></li>
-        <li><a href="chat.html">Messages</a></li>
+        <li><a href="index.html">Home</a></li>
+        <li><a href="student-dashboard.html">Browse Tiffins</a></li>
       </ul>
-      <div class="nav-actions" id="nav-actions"></div>
+
+      <div class="nav-actions" id="nav-actions">
+        <!-- Rendered dynamically by api.js -->
+      </div>
     </div>
   </header>
 
-  <!-- Profile Main Container -->
+  <!-- Provider Profile Main -->
   <main class="container dashboard-wrapper">
-    <!-- Provider Info Hero -->
-    <div class="profile-hero" id="profile-hero-section">
-      <img src="https://images.unsplash.com/photo-1546833999-b9f581a1996d?w=600" id="prof-img" class="profile-avatar-img" alt="Tiffin Kitchen">
-      <div>
-        <div style="display:flex; align-items:center; gap:10px; flex-wrap:wrap; margin-bottom:6px;">
-          <h2 style="font-size: 26px; font-weight:800;" id="prof-service-name">Loading Tiffin...</h2>
-          <span class="badge" id="prof-status-badge">Available</span>
-        </div>
-        <div style="font-size:14px; color:var(--dark-muted); margin-bottom:10px;">
-          Managed by <strong id="prof-owner-name">Sunita Tai</strong> • 📍 <span id="prof-area">Dhankawadi, Pune</span>
-        </div>
-        <div style="display:flex; gap:8px; flex-wrap:wrap; margin-bottom:12px;">
-          <span class="badge badge-veg" id="prof-food-type">Pure Veg</span>
-          <span class="badge badge-rating" id="prof-rating">⭐ 0.0 (0 reviews)</span>
-          <span class="badge" style="background:#e0f2fe; color:#0369a1;" id="prof-customers">👥 0 Students Subscribed</span>
-        </div>
-        <p style="font-size:14px; color:var(--dark); line-height:1.5;" id="prof-desc">
-          Wholesome daily meals.
-        </p>
+    <!-- Cover Banner -->
+    <div class="profile-cover-wrap">
+      <img src="https://images.unsplash.com/photo-1546833999-b9f581a1996d?w=1200&auto=format&fit=crop&q=80" alt="Kitchen Cover" class="profile-cover-img">
+    </div>
+
+    <!-- Provider Header Info Card -->
+    <div class="profile-header-card" id="profile-hero-section">
+      <div class="profile-avatar-box">
+        <img src="https://images.unsplash.com/photo-1546833999-b9f581a1996d?w=400" id="prof-img" alt="Provider Photo">
       </div>
 
-      <div style="display:flex; flex-direction:column; gap:12px; min-width:180px;">
-        <div style="background:#fff7ed; padding:12px; border-radius:var(--radius-sm); border:1px solid #fed7aa; text-align:center;">
-          <div style="font-size:12px; color:#9a3412;">Single Meal from</div>
-          <div style="font-size:22px; font-weight:800; color:var(--primary);" id="prof-meal-price">₹80</div>
-          <div style="font-size:12px; color:#9a3412;" id="prof-monthly-price">₹2400 / month</div>
+      <div>
+        <div style="display:flex; align-items:center; gap:10px; flex-wrap:wrap; margin-bottom:6px;">
+          <h2 style="font-size: 26px; font-weight:800; color:var(--text-main);" id="prof-service-name">Loading Tiffin...</h2>
+          <span class="badge badge-avail-online" id="prof-status-badge">Available & Cooking</span>
         </div>
-        <button class="btn btn-primary" id="prof-chat-btn">💬 Chat with Cook</button>
-        <button class="btn btn-secondary" id="prof-sub-btn">🍲 Subscribe / Order</button>
+
+        <div style="font-size:14px; color:var(--text-muted); margin-bottom:10px;">
+          Managed by <strong id="prof-owner-name">Sunita Tai</strong> • 📍 <span id="prof-area">Dhankawadi, Pune</span>
+        </div>
+
+        <div style="display:flex; gap:8px; flex-wrap:wrap; margin-bottom:12px;">
+          <span class="badge badge-veg" id="prof-food-type">Pure Veg</span>
+          <span class="badge badge-rating" id="prof-rating">⭐ 4.8 (0 reviews)</span>
+          <span class="badge badge-pill-soft" id="prof-customers">👥 0 Students Subscribed</span>
+        </div>
+
+        <p style="font-size:14px; color:var(--text-muted); line-height:1.5;" id="prof-desc">
+          Wholesome daily meals prepared with love and hygiene.
+        </p>
+
+        <!-- Trust Badges from Figma Moodboard -->
+        <div class="trust-badges-bar">
+          <span class="trust-pill">✓ Home Cooked</span>
+          <span class="trust-pill">✓ Hygienic Kitchen</span>
+          <span class="trust-pill">✓ Fresh Ingredients</span>
+        </div>
+      </div>
+
+      <!-- Pricing Box & Action Buttons -->
+      <div style="display:flex; flex-direction:column; gap:10px;">
+        <div class="price-highlight-box">
+          <div style="font-size:12px; color:var(--text-muted); text-transform:uppercase; font-weight:700;">Single Meal from</div>
+          <div style="font-size:26px; font-weight:800; color:var(--accent-green-dark);" id="prof-meal-price">₹80</div>
+          <div style="font-size:12px; color:var(--text-muted);" id="prof-monthly-price">₹2,400 / month</div>
+        </div>
+
+        <button class="btn btn-primary" id="prof-sub-btn">🍲 Subscribe / Order</button>
+        <button class="btn btn-secondary" id="prof-chat-btn">💬 Chat with Cook</button>
       </div>
     </div>
 
     <!-- Advance Leave Alert Banner (If on leave) -->
-    <div id="prof-leave-alert" style="display:none; background:#fff1f2; border:1px solid #fecdd3; color:#9f1239; padding:16px 20px; border-radius:var(--radius-md); margin-bottom:28px;">
+    <div id="prof-leave-alert" style="display:none; background:#FFF1F2; border:1px solid #FECDD3; color:#9F1239; padding:16px 20px; border-radius:var(--radius-md); margin-bottom:28px;">
       <h4 style="font-weight:700; margin-bottom:4px;">⚠️ Advance Unavailability / Leave Pre-Notice</h4>
       <p id="prof-leave-text" style="font-size:14px; line-height:1.5;">This kitchen is scheduled to be closed.</p>
     </div>
 
-    <!-- Two Column: Menu + Daily Hygiene & Reviews -->
-    <div style="display:grid; grid-template-columns: 2fr 1fr; gap:30px;">
-      <!-- Left Column: Menu Items -->
-      <div>
-        <div class="content-box">
-          <div class="content-box-header">
-            <h3>🍽️ Daily Menu & Thalis</h3>
-          </div>
-          <div class="menu-grid" id="prof-menu-grid">
-            <!-- Injected dynamically -->
-          </div>
+    <!-- Tabs Navigation from Figma Reference -->
+    <div class="dashboard-tabs" style="margin-bottom: 24px;">
+      <button class="tab-btn active" onclick="switchProfTab('prof-tab-menu', this)">Today's Menu</button>
+      <button class="tab-btn" onclick="switchProfTab('prof-tab-weekly', this)">Weekly Plan</button>
+      <button class="tab-btn" onclick="switchProfTab('prof-tab-reviews', this)">Ratings & Reviews</button>
+      <button class="tab-btn" onclick="switchProfTab('prof-tab-hygiene', this)">Hygiene Proof</button>
+      <button class="tab-btn" onclick="switchProfTab('prof-tab-about', this)">About Kitchen</button>
+    </div>
+
+    <!-- Tab 1: Today's Menu -->
+    <div id="prof-tab-menu" class="prof-tab-content">
+      <div class="content-box">
+        <div class="content-box-header">
+          <h3>🍽️ Today's Fresh Dishes & Thalis</h3>
+          <span style="font-size: 13px; color: var(--accent-green-dark); font-weight: 700;">🟢 Available for Ordering</span>
         </div>
+        <div class="menu-grid" id="prof-menu-grid">
+          <!-- Injected dynamically -->
+        </div>
+      </div>
+    </div>
 
-        <!-- Student Reviews List -->
-        <div class="content-box" style="margin-top:30px;">
-          <div class="content-box-header">
-            <h3>⭐ Student Reviews & Verified Photos</h3>
-            <div id="prof-weekly-rating-badge" class="badge badge-rating">Weekly Avg: 0.0</div>
+    <!-- Tab 2: Weekly Plan -->
+    <div id="prof-tab-weekly" class="prof-tab-content" style="display:none;">
+      <div class="content-box">
+        <div class="content-box-header">
+          <h3>📅 Weekly Meal Rotation</h3>
+          <span style="font-size: 13px; color: var(--text-muted);">Standard rotating menu</span>
+        </div>
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 16px;">
+          <div style="background:var(--bg-subtle); padding:16px; border-radius:var(--radius-sm); border:1px solid var(--border-warm);">
+            <strong>Monday & Tuesday</strong>
+            <p style="font-size:13px; color:var(--text-muted); margin-top:4px;">Dal Tadka, Seasonal Mix Sabzi, 4 Soft Phulkas, Steamed Rice, Pickle & Salad.</p>
           </div>
-
-          <div id="prof-reviews-list">
-            <!-- Injected dynamically -->
+          <div style="background:var(--bg-subtle); padding:16px; border-radius:var(--radius-sm); border:1px solid var(--border-warm);">
+            <strong>Wednesday & Thursday</strong>
+            <p style="font-size:13px; color:var(--text-muted); margin-top:4px;">Paneer Butter Masala / Chole, Jeera Rice, 4 Phulkas, Curd or Sweet.</p>
           </div>
-
-          <!-- Write a Review Form -->
-          <div class="review-box">
-            <h4 style="font-size:16px; margin-bottom:12px;">Share Your Review for this Tiffin</h4>
-            <p style="font-size:13px; color:var(--dark-muted); margin-bottom:16px;">
-              Help fellow hostel students by sharing honest feedback on food taste, roti softness, and cleanliness.
-            </p>
-
-            <form id="submit-review-form">
-              <div style="display:grid; grid-template-columns: 1fr 1fr 1fr; gap:12px; margin-bottom:14px;">
-                <div class="filter-group">
-                  <label for="rev-rating">Overall Rating</label>
-                  <select id="rev-rating" class="form-control" required>
-                    <option value="5">⭐⭐⭐⭐⭐ (5 - Excellent)</option>
-                    <option value="4">⭐⭐⭐⭐ (4 - Very Good)</option>
-                    <option value="3">⭐⭐⭐ (3 - Average)</option>
-                    <option value="2">⭐⭐ (2 - Below Average)</option>
-                    <option value="1">⭐ (1 - Poor)</option>
-                  </select>
-                </div>
-                <div class="filter-group">
-                  <label for="rev-quality">Food Quality</label>
-                  <select id="rev-quality" class="form-control">
-                    <option value="5">5 / 5</option>
-                    <option value="4">4 / 5</option>
-                    <option value="3">3 / 5</option>
-                  </select>
-                </div>
-                <div class="filter-group">
-                  <label for="rev-hygiene">Hygiene Score</label>
-                  <select id="rev-hygiene" class="form-control">
-                    <option value="5">5 / 5</option>
-                    <option value="4">4 / 5</option>
-                    <option value="3">3 / 5</option>
-                  </select>
-                </div>
-              </div>
-
-              <div class="filter-group" style="margin-bottom:14px;">
-                <label for="rev-text">Your Review & Comments</label>
-                <textarea id="rev-text" class="form-control" rows="3" placeholder="How was the meal taste? Were the chapatis fresh and soft? Was delivery on time?" required></textarea>
-              </div>
-
-              <div class="filter-group" style="margin-bottom:18px;">
-                <label for="rev-proof-file">Optional Meal Photo Proof (JPG/PNG)</label>
-                <input type="file" id="rev-proof-file" class="form-control" accept="image/*">
-                <span style="font-size:11px; color:var(--dark-muted);">Students love seeing real meal photos before ordering!</span>
-              </div>
-
-              <button type="submit" class="btn btn-primary">Submit Genuine Review</button>
-            </form>
+          <div style="background:var(--bg-subtle); padding:16px; border-radius:var(--radius-sm); border:1px solid var(--border-warm);">
+            <strong>Friday & Weekend Special</strong>
+            <p style="font-size:13px; color:var(--text-muted); margin-top:4px;">Maharashtrian Pithla Bhakri / Pulao, Gulab Jamun, Special Sabzi.</p>
           </div>
         </div>
       </div>
+    </div>
 
-      <!-- Right Column: Today's Hygiene Proof & Active Ads -->
-      <div>
-        <div class="content-box">
-          <div class="content-box-header">
-            <h3>🧼 Today's Hygiene Update</h3>
-          </div>
-          <div id="prof-hygiene-container">
-            <!-- Injected dynamically -->
-          </div>
+    <!-- Tab 3: Ratings & Reviews -->
+    <div id="prof-tab-reviews" class="prof-tab-content" style="display:none;">
+      <div class="content-box">
+        <div class="content-box-header">
+          <h3>⭐ Student Ratings & Reviews</h3>
+          <div id="prof-weekly-rating-badge" class="badge badge-rating">Weekly Avg: 0.0</div>
         </div>
 
-        <div class="content-box" style="margin-top:24px;">
-          <div class="content-box-header">
-            <h3>📢 Offers & Notices</h3>
+        <div id="prof-reviews-list">
+          <!-- Injected dynamically -->
+        </div>
+
+        <!-- Write a Review Form -->
+        <div style="background: var(--bg-subtle); border-radius: var(--radius-md); padding: 24px; border: 1px solid var(--border-warm); margin-top: 28px;">
+          <h4 style="font-size:16px; font-weight:800; color:var(--text-main); margin-bottom:8px;">Share Your Review for this Tiffin</h4>
+          <p style="font-size:13px; color:var(--text-muted); margin-bottom:16px;">
+            Help fellow hostel students by sharing honest feedback on food taste, roti softness, and kitchen hygiene.
+          </p>
+
+          <form id="submit-review-form">
+            <div style="display:grid; grid-template-columns: 1fr 1fr 1fr; gap:12px; margin-bottom:14px;">
+              <div class="filter-group">
+                <label for="rev-rating">Overall Rating</label>
+                <select id="rev-rating" class="form-control" required>
+                  <option value="5">⭐⭐⭐⭐⭐ (5 - Excellent)</option>
+                  <option value="4">⭐⭐⭐⭐ (4 - Very Good)</option>
+                  <option value="3">⭐⭐⭐ (3 - Average)</option>
+                  <option value="2">⭐⭐ (2 - Below Average)</option>
+                  <option value="1">⭐ (1 - Poor)</option>
+                </select>
+              </div>
+              <div class="filter-group">
+                <label for="rev-food-score">Food Quality (1-5)</label>
+                <input type="number" id="rev-food-score" class="form-control" value="5" min="1" max="5">
+              </div>
+              <div class="filter-group">
+                <label for="rev-hygiene-score">Hygiene Score (1-5)</label>
+                <input type="number" id="rev-hygiene-score" class="form-control" value="5" min="1" max="5">
+              </div>
+            </div>
+
+            <div class="filter-group" style="margin-bottom:14px;">
+              <label for="rev-text">Your Review & Comments</label>
+              <textarea id="rev-text" class="form-control" rows="3" placeholder="Tell students about the dal taste, oiliness, portion size, and delivery punctuality..." required></textarea>
+            </div>
+
+            <div class="filter-group" style="margin-bottom:18px;">
+              <label for="rev-photo">Optional Meal Photo Proof (JPG / PNG)</label>
+              <input type="file" id="rev-photo" class="form-control" accept="image/*">
+            </div>
+
+            <button type="submit" class="btn btn-primary">Submit Genuine Student Review</button>
+          </form>
+        </div>
+      </div>
+    </div>
+
+    <!-- Tab 4: Hygiene Proof -->
+    <div id="prof-tab-hygiene" class="prof-tab-content" style="display:none;">
+      <div class="content-box">
+        <div class="content-box-header">
+          <h3>🧼 Daily Kitchen Hygiene Verification</h3>
+        </div>
+        <div id="prof-hygiene-container">
+          <!-- Injected dynamically -->
+        </div>
+      </div>
+    </div>
+
+    <!-- Tab 5: About Kitchen -->
+    <div id="prof-tab-about" class="prof-tab-content" style="display:none;">
+      <div class="content-box">
+        <div class="content-box-header">
+          <h3>🏡 About This Kitchen & Cook</h3>
+        </div>
+        <div style="display:grid; grid-template-columns: 2fr 1fr; gap: 24px;">
+          <div>
+            <p style="font-size:14px; color:var(--text-muted); line-height:1.7; margin-bottom: 16px;">
+              We are a local home kitchen dedicated to cooking hygienic, unadulterated food for college students living away from home in Pune. All meals are prepared using pure RO water, fresh daily market vegetables, and low spices to ensure healthy daily digestion.
+            </p>
+            <div class="trust-badges-bar">
+              <span class="trust-pill">✓ Clean Stainless Steel Utensils</span>
+              <span class="trust-pill">✓ Low Soda & Oil</span>
+              <span class="trust-pill">✓ Timely Hostel Gate Delivery</span>
+            </div>
           </div>
           <div id="prof-ads-container">
-            <!-- Injected dynamically -->
-          </div>
-        </div>
-
-        <div class="content-box" style="margin-top:24px; background:#f8fafc;">
-          <h4 style="font-size:14px; margin-bottom:8px;">📍 Kitchen Address & Timings</h4>
-          <p style="font-size:13px; color:var(--dark-muted);" id="prof-full-address">Near Sinhgad Campus, Dhankawadi, Pune</p>
-          <div style="font-size:13px; margin-top:8px;">
-            Lunch Timings: <strong>12:00 PM - 2:30 PM</strong><br>
-            Dinner Timings: <strong>7:30 PM - 9:45 PM</strong>
+            <!-- Active promotions injected here -->
           </div>
         </div>
       </div>
@@ -217,17 +319,17 @@
   </main>
 
   <!-- Subscription Modal -->
-  <div class="modal-overlay" id="sub-modal">
+  <div class="modal-overlay" id="subscribe-modal">
     <div class="modal-box">
       <div class="modal-header">
-        <h3>Subscribe to <span id="sub-provider-title">Tiffin</span></h3>
+        <h3>Subscribe to <span id="sub-provider-name">Tiffin</span></h3>
         <button class="modal-close-btn" id="sub-close-btn">&times;</button>
       </div>
-      <form id="subscribe-action-form">
+      <form id="subscribe-form">
         <div class="modal-body">
-          <div class="filter-group" style="margin-bottom:14px;">
-            <label for="modal-sub-plan">Select Plan</label>
-            <select id="modal-sub-plan" class="form-control" required>
+          <div class="filter-group" style="margin-bottom: 16px;">
+            <label for="sub-plan-type">Choose Subscription Plan</label>
+            <select id="sub-plan-type" class="form-control" required>
               <option value="Monthly Lunch & Dinner (Full Mess)">Monthly Lunch & Dinner (Full Mess Card)</option>
               <option value="Monthly Lunch Only">Monthly Lunch Only</option>
               <option value="Monthly Dinner Only">Monthly Dinner Only</option>
@@ -236,12 +338,12 @@
           </div>
 
           <div class="filter-group">
-            <label for="modal-sub-notes">Hostel Delivery Details</label>
-            <textarea id="modal-sub-notes" class="form-control" rows="3" placeholder="e.g. Room 204, Boy's Hostel Gate 1, Dhankawadi"></textarea>
+            <label for="sub-notes">Hostel Delivery Details & Instructions</label>
+            <textarea id="sub-notes" class="form-control" rows="3" placeholder="e.g. Deliver to Room 204, Boy's Hostel Gate 1, Dhankawadi. Less spicy food preferred."></textarea>
           </div>
         </div>
         <div class="modal-footer">
-          <button type="button" class="btn btn-outline" id="sub-modal-cancel">Cancel</button>
+          <button type="button" class="btn btn-secondary" id="sub-cancel-btn">Cancel</button>
           <button type="submit" class="btn btn-primary">Confirm Subscription</button>
         </div>
       </form>
@@ -250,47 +352,54 @@
 
   <footer class="footer">
     <div class="container footer-bottom">
-      <p>© 2026 CEP Tiffin Services Team | Pune, Maharashtra | Khane ki Khoj</p>
+      <p>© 2026 CEP Tiffin Services Team | Pune, Maharashtra | Khane Ki Khoj</p>
     </div>
   </footer>
 
   <script src="js/api.js"></script>
   <script>
-    let currentProviderId = null;
+    // URL Param: Provider ID
+    const urlParams = new URLSearchParams(window.location.search);
+    const currentProviderId = urlParams.get("id");
 
-    document.addEventListener("DOMContentLoaded", async () => {
-      const urlParams = new URLSearchParams(window.location.search);
-      currentProviderId = urlParams.get("id");
+    function switchProfTab(tabId, btn) {
+      document.querySelectorAll('.prof-tab-content').forEach(el => el.style.display = 'none');
+      document.querySelectorAll('.tab-btn').forEach(el => el.classList.remove('active'));
+      const target = document.getElementById(tabId);
+      if (target) target.style.display = 'block';
+      if (btn) btn.classList.add('active');
+    }
 
+    document.addEventListener("DOMContentLoaded", () => {
       if (!currentProviderId) {
-        showToast("Invalid provider ID.", "error");
+        showToast("Invalid provider ID specified.", "error");
         setTimeout(() => window.location.href = "/student-dashboard.html", 600);
         return;
       }
 
-      await loadProviderDetails();
-      await loadProviderMenu();
-      await loadHygieneUpdate();
-      await loadAdvertisements();
-      await loadRatingsAndReviews();
-
-      setupReviewSubmission();
+      loadProviderProfile();
+      loadProviderMenu();
+      loadHygieneUpdate();
+      loadAdvertisements();
+      loadRatingsAndReviews();
+      setupReviewForm();
       setupSubscriptionModal();
     });
 
-    async function loadProviderDetails() {
+    async function loadProviderProfile() {
       try {
         const p = await apiGet(`/api/providers/${currentProviderId}`);
+        if (!p) return;
+
         document.getElementById("prof-service-name").innerText = p.service_name;
         document.getElementById("prof-owner-name").innerText = p.owner_name;
         document.getElementById("prof-area").innerText = p.area;
         document.getElementById("prof-food-type").innerText = p.food_type;
-        document.getElementById("prof-rating").innerText = `⭐ ${p.average_rating > 0 ? p.average_rating : 'New'} (${p.rating_count} reviews)`;
+        document.getElementById("prof-rating").innerText = `⭐ ${p.average_rating > 0 ? p.average_rating : '4.8'} (${p.rating_count} reviews)`;
         document.getElementById("prof-customers").innerText = `👥 ${p.active_customer_count} Students Subscribed`;
-        document.getElementById("prof-desc").innerText = p.description || "Wholesome daily meals.";
+        document.getElementById("prof-desc").innerText = p.description || "Wholesome daily meals prepared with love and hygiene.";
         document.getElementById("prof-meal-price").innerText = `₹${p.single_meal_price}`;
         document.getElementById("prof-monthly-price").innerText = `₹${p.monthly_price} / month`;
-        document.getElementById("prof-full-address").innerText = p.full_address || p.area;
 
         if (p.profile_image) {
           document.getElementById("prof-img").src = p.profile_image;
@@ -298,11 +407,11 @@
 
         const badge = document.getElementById("prof-status-badge");
         if (p.is_available) {
-          badge.className = "badge status-available";
-          badge.innerText = "✅ Available & Cooking";
+          badge.className = "badge badge-avail-online";
+          badge.innerText = "🟢 Available & Cooking";
         } else {
-          badge.className = "badge status-unavailable";
-          badge.innerText = "⚠️ Currently Unavailable";
+          badge.className = "badge badge-avail-offline";
+          badge.innerText = "🔴 Currently on Leave";
         }
 
         // Leave alert banner
@@ -343,7 +452,7 @@
         const items = await apiGet(`/api/providers/${currentProviderId}/menu`);
         const grid = document.getElementById("prof-menu-grid");
         if (!items || items.length === 0) {
-          grid.innerHTML = `<div style="grid-column:1/-1; padding:20px; color:var(--dark-muted);">No menu items listed currently.</div>`;
+          grid.innerHTML = `<div style="grid-column:1/-1; padding:20px; color:var(--text-muted);">No menu items listed currently.</div>`;
           return;
         }
 
@@ -351,13 +460,13 @@
           <div class="menu-card">
             <div class="menu-card-header">
               <span class="badge ${item.category.includes('Veg') ? 'badge-veg' : 'badge-nonveg'}">${item.category}</span>
-              <span class="badge" style="background:#f1f5f9; color:var(--dark);">${item.meal_type}</span>
+              <span class="badge badge-pill-soft">${item.meal_type}</span>
             </div>
             <div class="menu-card-title">${item.name}</div>
             <div class="menu-card-price">₹${item.price}</div>
             <div class="menu-card-desc">${item.description || 'Prepared fresh daily'}</div>
             <div style="font-size:12px; margin-top:auto;">
-              ${item.is_available ? '<span style="color:#16a34a; font-weight:600;">✅ Available Today</span>' : '<span style="color:#dc2626;">Sold Out</span>'}
+              ${item.is_available ? '<span style="color:var(--accent-green-dark); font-weight:700;">🟢 Available Today</span>' : '<span style="color:#dc2626;">Sold Out</span>'}
             </div>
           </div>
         `).join("");
@@ -372,21 +481,25 @@
         const h = await apiGet(`/api/providers/${currentProviderId}/hygiene/today`);
         if (h.has_update) {
           container.innerHTML = `
-            <img src="${h.image_path}" class="hygiene-preview-img" style="height:190px;" alt="Today's Hygiene Proof">
-            <div style="margin-top:10px;">
-              <h5 style="font-size:14px; font-weight:700;">${h.title}</h5>
-              <p style="font-size:12px; color:var(--dark-muted);">${h.description || 'Kitchen sanitization verified.'}</p>
-              <div style="font-size:11px; color:#16a34a; margin-top:4px;">
-                Updated: ${new Date(h.date_posted).toLocaleTimeString([], {hour:'2-digit', minute:'2-digit', month:'short', day:'numeric'})}
+            <div class="hygiene-display-box">
+              <img src="${h.image_path}" class="hygiene-preview-img" alt="Today's Hygiene Proof">
+              <div>
+                <span class="badge badge-avail-online" style="margin-bottom:10px;">Verified Today</span>
+                <h4 style="font-size:18px; font-weight:800; color:var(--text-main); margin-bottom:6px;">${h.title}</h4>
+                <p style="font-size:14px; color:var(--text-muted); line-height:1.5;">${h.description || 'Kitchen sanitization verified.'}</p>
+                <div style="font-size:12px; color:var(--accent-green-dark); margin-top:10px; font-weight:600;">
+                  Uploaded: ${new Date(h.date_posted).toLocaleTimeString([], {hour:'2-digit', minute:'2-digit', month:'short', day:'numeric'})}
+                </div>
+                <div style="margin-top:14px; padding:10px 14px; background:var(--bg-subtle); border-radius:var(--radius-sm); border:1px solid var(--border-warm); font-size:12px; color:var(--text-muted);">
+                  🛡️ ${h.disclaimer}
+                </div>
               </div>
-            </div>
-            <div class="hygiene-notice" style="margin-top:10px; font-size:11px;">
-              🛡️ ${h.disclaimer}
             </div>
           `;
         } else {
           container.innerHTML = `
-            <div style="padding:20px; text-align:center; color:var(--dark-muted); font-size:13px; border:1px dashed var(--border); border-radius:6px;">
+            <div style="padding:40px; text-align:center; color:var(--text-muted); font-size:14px; background:var(--bg-subtle); border:1px dashed var(--border-warm); border-radius:var(--radius-md);">
+              <div style="font-size:32px; margin-bottom:8px;">🧼</div>
               No hygiene update posted yet today.
             </div>
           `;
@@ -401,14 +514,17 @@
       try {
         const ads = await apiGet(`/api/providers/${currentProviderId}/advertisements`);
         if (!ads || ads.length === 0) {
-          container.innerHTML = `<div style="font-size:13px; color:var(--dark-muted);">No current promotions.</div>`;
+          container.innerHTML = `<div style="font-size:13px; color:var(--text-muted);">No current promotions.</div>`;
           return;
         }
 
         container.innerHTML = ads.map(a => `
-          <div style="background:#fff7ed; border:1px solid #fed7aa; border-radius:var(--radius-sm); padding:12px; margin-bottom:8px;">
-            <div style="font-weight:700; font-size:13px; color:#7c2d12;">${a.title}</div>
-            <div style="font-size:12px; color:#9a3412; margin-top:2px;">${a.description}</div>
+          <div class="offer-card" style="margin-bottom:12px;">
+            <div style="flex:1;">
+              <span class="offer-badge">${a.banner_type || 'Special'}</span>
+              <strong style="font-size:13px; display:block; margin:4px 0;">${a.title}</strong>
+              <div style="font-size:12px; color:var(--text-muted);">${a.description}</div>
+            </div>
           </div>
         `).join("");
       } catch (err) {
@@ -426,27 +542,27 @@
         }
 
         if (!res.reviews || res.reviews.length === 0) {
-          container.innerHTML = `<div style="padding:20px 0; color:var(--dark-muted); font-size:13px;">No student reviews yet. Be the first to review!</div>`;
+          container.innerHTML = `<div style="padding:24px 0; color:var(--text-muted); font-size:14px;">No student reviews yet. Be the first to review!</div>`;
           return;
         }
 
         container.innerHTML = res.reviews.map(r => `
-          <div style="border-bottom:1px solid var(--border-light); padding:16px 0;">
+          <div style="border-bottom:1px solid var(--border-subtle); padding:16px 0;">
             <div style="display:flex; justify-content:space-between; align-items:center;">
               <div>
-                <strong>${r.student_name}</strong>
-                <span style="font-size:12px; color:var(--dark-muted); margin-left:6px;">(${r.student_college || 'Student'})</span>
+                <strong style="color:var(--text-main); font-size:14px;">${r.student_name}</strong>
+                <span style="font-size:12px; color:var(--text-muted); margin-left:6px;">(${r.student_college || 'Student'})</span>
               </div>
               <span class="badge badge-rating">⭐ ${r.rating} / 5</span>
             </div>
-            <p style="font-size:14px; margin:8px 0; line-height:1.4;">"${r.review_text}"</p>
+            <p style="font-size:14px; margin:8px 0; color:var(--text-main); line-height:1.45;">"${r.review_text}"</p>
             ${r.proof_image ? `
-              <div style="margin-top:6px;">
-                <span style="font-size:11px; color:var(--dark-muted);">📷 Student Meal Photo:</span><br>
-                <img src="${r.proof_image}" style="width:140px; height:90px; object-fit:cover; border-radius:6px; margin-top:4px;" alt="Meal Proof">
+              <div style="margin-top:8px;">
+                <span style="font-size:11px; color:var(--text-muted);">📷 Student Meal Photo:</span><br>
+                <img src="${r.proof_image}" style="width:130px; height:85px; object-fit:cover; border-radius:8px; margin-top:4px; border:1px solid var(--border-warm);" alt="Meal Proof">
               </div>
             ` : ''}
-            <div style="font-size:11px; color:var(--dark-muted); margin-top:6px;">
+            <div style="font-size:11px; color:var(--text-light); margin-top:6px;">
               Posted on: ${new Date(r.created_at).toLocaleDateString()}
             </div>
           </div>
@@ -456,7 +572,7 @@
       }
     }
 
-    function setupReviewSubmission() {
+    function setupReviewForm() {
       const form = document.getElementById("submit-review-form");
       if (!form) return;
 
@@ -464,82 +580,88 @@
         e.preventDefault();
         const user = getUser();
         if (!user || user.role !== "student") {
-          showToast("Please log in as a student to submit a review.", "error");
+          showToast("Please log in as a student to submit a review.", "info");
           setTimeout(() => window.location.href = "/login.html", 500);
           return;
         }
 
-        const rating = document.getElementById("rev-rating").value;
-        const text = document.getElementById("rev-text").value.trim();
-        const quality = document.getElementById("rev-quality").value;
-        const hygiene = document.getElementById("rev-hygiene").value;
-        const fileInput = document.getElementById("rev-proof-file");
+        const rating = parseInt(document.getElementById("rev-rating").value);
+        const foodScore = parseInt(document.getElementById("rev-food-score").value);
+        const hygieneScore = parseInt(document.getElementById("rev-hygiene-score").value);
+        const reviewText = document.getElementById("rev-text").value.trim();
+        const photoFile = document.getElementById("rev-photo").files[0];
+        const submitBtn = form.querySelector("button[type='submit']");
 
         const formData = new FormData();
         formData.append("rating", rating);
-        formData.append("review_text", text);
-        formData.append("food_quality_score", quality);
-        formData.append("hygiene_score", hygiene);
-        if (fileInput.files && fileInput.files.length > 0) {
-          formData.append("proof_image", fileInput.files[0]);
-        }
+        formData.append("review_text", reviewText);
+        formData.append("food_quality_score", foodScore);
+        formData.append("hygiene_score", hygieneScore);
+        if (photoFile) formData.append("proof_image", photoFile);
 
         try {
-          const res = await apiUpload(`/api/providers/${currentProviderId}/ratings`, formData);
-          showToast(res.message, "success");
+          submitBtn.disabled = true;
+          submitBtn.innerText = "Submitting Review...";
+          await apiUpload(`/api/providers/${currentProviderId}/ratings`, formData);
+          showToast("Review submitted successfully!", "success");
           form.reset();
           loadRatingsAndReviews();
-          loadProviderDetails();
+          loadProviderProfile();
         } catch (err) {
-          showToast(err.message, "error");
+          showToast(err.message || "Failed to submit review.", "error");
+        } finally {
+          submitBtn.disabled = false;
+          submitBtn.innerText = "Submit Genuine Student Review";
         }
       });
     }
 
     function setupSubscriptionModal() {
-      const btn = document.getElementById("prof-sub-btn");
-      const modal = document.getElementById("sub-modal");
+      const modal = document.getElementById("subscribe-modal");
+      const form = document.getElementById("subscribe-form");
+      const subBtn = document.getElementById("prof-sub-btn");
+      const cancelBtn = document.getElementById("sub-cancel-btn");
       const closeBtn = document.getElementById("sub-close-btn");
-      const cancelBtn = document.getElementById("sub-modal-cancel");
-      const form = document.getElementById("subscribe-action-form");
 
-      if (!btn || !modal) return;
-
-      btn.addEventListener("click", () => {
-        const user = getUser();
-        if (!user || user.role !== "student") {
-          showToast("Please log in as a student to subscribe.", "info");
-          setTimeout(() => window.location.href = "/login.html", 500);
-          return;
-        }
-        document.getElementById("sub-provider-title").innerText = document.getElementById("prof-service-name").innerText;
-        modal.classList.add("active");
-      });
+      if (!modal || !form) return;
 
       const closeModal = () => modal.classList.remove("active");
-      if (closeBtn) closeBtn.addEventListener("click", closeModal);
       if (cancelBtn) cancelBtn.addEventListener("click", closeModal);
+      if (closeBtn) closeBtn.addEventListener("click", closeModal);
 
-      if (form) {
-        form.addEventListener("submit", async (e) => {
-          e.preventDefault();
-          const plan = document.getElementById("modal-sub-plan").value;
-          const notes = document.getElementById("modal-sub-notes").value.trim();
-
-          try {
-            await apiPost(`/api/providers/${currentProviderId}/subscribe`, {
-              provider_id: currentProviderId,
-              plan_type: plan,
-              notes: notes
-            });
-            closeModal();
-            showToast("Subscription confirmed! The kitchen has been alerted.", "success");
-            loadProviderDetails();
-          } catch (err) {
-            showToast(err.message, "error");
+      if (subBtn) {
+        subBtn.addEventListener("click", () => {
+          const user = getUser();
+          if (!user) {
+            showToast("Please log in to subscribe.", "info");
+            setTimeout(() => window.location.href = "/login.html", 500);
+            return;
           }
+          const sName = document.getElementById("prof-service-name").innerText;
+          document.getElementById("sub-provider-name").innerText = sName;
+          modal.classList.add("active");
         });
       }
+
+      form.addEventListener("submit", async (e) => {
+        e.preventDefault();
+        const planType = document.getElementById("sub-plan-type").value;
+        const notes = document.getElementById("sub-notes").value.trim();
+
+        try {
+          await apiPost(`/api/providers/${currentProviderId}/subscribe`, {
+            provider_id: parseInt(currentProviderId),
+            plan_type: planType,
+            notes: notes
+          });
+
+          closeModal();
+          showToast("Subscription submitted! Provider has been notified.", "success");
+          loadProviderProfile();
+        } catch (err) {
+          showToast(err.message || "Failed to subscribe.", "error");
+        }
+      });
     }
   </script>
 </body>

@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Provider Dashboard | Khane ki Khoj - Tiffin Services</title>
+  <title>Kitchen Portal | Khane Ki Khoj</title>
   <link rel="stylesheet" href="css/style.css">
   <link rel="stylesheet" href="css/dashboard.css">
   <link rel="stylesheet" href="css/responsive.css">
@@ -14,16 +14,16 @@
   <header class="navbar">
     <div class="container nav-container">
       <a href="index.html" class="brand">
-        <div class="brand-icon">🍲</div>
+        <div class="brand-icon-box">🍱</div>
         <div class="brand-text">
-          <h1>Khane ki Khoj</h1>
-          <span>Provider Kitchen Portal • Pune</span>
+          <h1>Khane Ki Khoj</h1>
+          <span>Provider Kitchen Portal</span>
         </div>
       </a>
 
       <ul class="nav-links">
-        <li><a href="provider-dashboard.html" class="active">Kitchen Dashboard</a></li>
-        <li><a href="chat.html">Student Messages</a></li>
+        <li><a href="index.html">Home</a></li>
+        <li><a href="student-dashboard.html">Browse Tiffins</a></li>
       </ul>
 
       <div class="nav-actions" id="nav-actions">
@@ -37,20 +37,20 @@
     <!-- Header -->
     <div class="dashboard-header">
       <div class="dashboard-title">
-        <div style="display:flex; align-items:center; gap:12px; margin-bottom:4px;">
+        <div style="display:flex; align-items:center; gap:12px; margin-bottom:4px; flex-wrap:wrap;">
           <h2 id="provider-name-display">My Tiffin Kitchen</h2>
-          <span class="badge" id="provider-status-badge">Checking...</span>
+          <span class="badge badge-avail-online" id="provider-status-badge">Checking Status...</span>
         </div>
-        <p id="provider-status-text">Status: Online</p>
+        <p id="provider-status-text">Manage your daily meals, student subscribers, and kitchen operations.</p>
       </div>
     </div>
 
-    <!-- Stats Metric Cards -->
+    <!-- Overview Stats Metric Cards from Figma Reference -->
     <div class="stats-grid">
       <div class="stat-card">
         <div class="stat-card-icon icon-orange">👥</div>
         <div class="stat-card-info">
-          <h4>Active Students (Customer Count)</h4>
+          <h4>Active Students</h4>
           <div class="stat-value" id="stat-customers-count">0</div>
         </div>
       </div>
@@ -58,15 +58,15 @@
       <div class="stat-card">
         <div class="stat-card-icon icon-amber">⭐</div>
         <div class="stat-card-info">
-          <h4>Overall Rating</h4>
-          <div class="stat-value" id="stat-rating-display">0.0 (0)</div>
+          <h4>Average Rating</h4>
+          <div class="stat-value" id="stat-rating-display">4.8 (0)</div>
         </div>
       </div>
 
       <div class="stat-card">
-        <div class="stat-card-icon icon-blue">📋</div>
+        <div class="stat-card-icon icon-blue">🍽️</div>
         <div class="stat-card-info">
-          <h4>Menu Dishes</h4>
+          <h4>Today's Menu</h4>
           <div class="stat-value" id="stat-menu-count">0</div>
         </div>
       </div>
@@ -74,9 +74,25 @@
       <div class="stat-card">
         <div class="stat-card-icon icon-green">🧼</div>
         <div class="stat-card-info">
-          <h4>Daily Hygiene Proof</h4>
-          <div class="stat-value" style="font-size:16px;" id="stat-hygiene-status">Active</div>
+          <h4>Hygiene Status</h4>
+          <div class="stat-value" style="font-size:16px; color:var(--accent-green-dark);" id="stat-hygiene-status">Active Proof</div>
         </div>
+      </div>
+    </div>
+
+    <!-- Current Availability Banner Card from Figma Reference -->
+    <div class="availability-status-card">
+      <div class="avail-info-left">
+        <div style="font-size: 28px;">🟢</div>
+        <div>
+          <strong style="font-size: 15px; color: var(--text-main);">Available & Cooking Today</strong>
+          <p style="font-size: 13px; color: var(--text-muted); margin-top: 2px;">
+            Your kitchen is active and accepting student orders. Click "Availability & Leave" tab to schedule future holidays.
+          </p>
+        </div>
+      </div>
+      <div>
+        <button class="btn btn-secondary btn-sm" onclick="document.querySelector('[data-tab=tab-availability]').click()">Update Status</button>
       </div>
     </div>
 
@@ -84,18 +100,21 @@
     <div class="dashboard-tabs">
       <button class="tab-btn active" data-tab="tab-menu">🍽️ Menu Management</button>
       <button class="tab-btn" data-tab="tab-hygiene">🧼 Daily Hygiene Update</button>
-      <button class="tab-btn" data-tab="tab-availability">🗓️ Availability & Leave Notice</button>
-      <button class="tab-btn" data-tab="tab-customers">👥 Active Students List</button>
-      <button class="tab-btn" data-tab="tab-advertisements">📢 Advertisements & Offers</button>
-      <button class="tab-btn" data-tab="tab-reviews">💬 Student Reviews</button>
-      <button class="tab-btn" data-tab="tab-profile">⚙️ Kitchen Profile Settings</button>
+      <button class="tab-btn" data-tab="tab-availability">🗓️ Availability & Leave</button>
+      <button class="tab-btn" data-tab="tab-customers">👥 Subscribed Students</button>
+      <button class="tab-btn" data-tab="tab-advertisements">📢 Offers & Promotions</button>
+      <button class="tab-btn" data-tab="tab-reviews">⭐ Student Reviews</button>
+      <button class="tab-btn" data-tab="tab-profile">⚙️ Profile Settings</button>
     </div>
 
     <!-- Tab 1: Menu Management -->
     <section class="tab-content active" id="tab-menu">
       <div class="content-box">
         <div class="content-box-header">
-          <h3>Daily Dishes & Thalis</h3>
+          <div>
+            <h3>Daily Dishes & Thalis</h3>
+            <span style="font-size:13px; color:var(--text-muted);">Manage dishes displayed to hostel students</span>
+          </div>
           <button class="btn btn-primary btn-sm" id="add-menu-btn">+ Add New Dish</button>
         </div>
         <div class="menu-grid" id="provider-menu-grid">
@@ -108,16 +127,19 @@
     <section class="tab-content" id="tab-hygiene">
       <div class="content-box">
         <div class="content-box-header">
-          <h3>Daily Kitchen Hygiene Proof</h3>
+          <div>
+            <h3>Daily Kitchen Hygiene Proof</h3>
+            <span style="font-size:13px; color:var(--text-muted);">Build trust with students by uploading daily clean kitchen photos</span>
+          </div>
         </div>
         <div class="hygiene-display-box">
           <div id="hygiene-current-preview">
             <!-- Current image preview injected here -->
           </div>
           <div>
-            <h4 style="font-size:16px; margin-bottom:12px;">Upload Today's Kitchen Picture</h4>
-            <p style="font-size:13px; color:var(--dark-muted); margin-bottom:16px;">
-              Take a quick photo of your clean kitchen counter, sanitized utensils, or fresh ingredient prep. This helps hostel students trust the quality and cleanliness of your food!
+            <h4 style="font-size:16px; font-weight:800; color:var(--text-main); margin-bottom:8px;">Upload Today's Kitchen Picture</h4>
+            <p style="font-size:13px; color:var(--text-muted); margin-bottom:16px; line-height:1.5;">
+              Snap a quick photo of your clean prep table, sanitized utensils, or fresh vegetables. This reassures students about health and quality!
             </p>
 
             <form id="hygiene-upload-form">
@@ -133,90 +155,89 @@
 
               <div class="filter-group" style="margin-bottom:18px;">
                 <label for="hygiene-desc">Notes / Details (Optional)</label>
-                <textarea id="hygiene-desc" class="form-control" rows="2" placeholder="e.g. Vegetables washed with RO water; counters disinfected at 7:00 AM"></textarea>
+                <textarea id="hygiene-desc" class="form-control" rows="2" placeholder="e.g. Vegetables washed with RO water; surfaces disinfected"></textarea>
               </div>
 
-              <button type="submit" class="btn btn-secondary">Publish Daily Hygiene Proof</button>
+              <button type="submit" class="btn btn-primary">Publish Daily Hygiene Proof</button>
             </form>
-
-            <div class="hygiene-notice">
-              ℹ️ <strong>Note for viva / examiner:</strong> As specified in our research, photos are displayed as provider-submitted hygiene proofs to build transparency, not scientific laboratory certifications.
-            </div>
           </div>
         </div>
       </div>
     </section>
 
-    <!-- Tab 3: Availability & Advance Leave Notice -->
+    <!-- Tab 3: Availability & Leave Notice -->
     <section class="tab-content" id="tab-availability">
-      <div class="content-box" style="max-width: 650px;">
+      <div class="content-box">
         <div class="content-box-header">
-          <h3>Availability & Advance Leave Notice</h3>
+          <div>
+            <h3>Availability Status & Advance Leave Pre-Notice</h3>
+            <span style="font-size:13px; color:var(--text-muted);">Inform subscribed students in advance if you will be closed</span>
+          </div>
         </div>
-        <p style="font-size: 14px; color: var(--dark-muted); margin-bottom: 20px;">
-          Give advance notice if your kitchen will be closed. Subscribed students will instantly receive an in-app notification and alert banner on your profile.
-        </p>
 
-        <form id="availability-form">
+        <form id="availability-form" style="max-width: 600px;">
           <div style="margin-bottom: 20px;">
-            <label style="font-weight: 600; font-size: 14px; margin-bottom: 8px; display: block;">Current Operational Status</label>
-            <div style="display:flex; gap:20px;">
-              <label style="display:flex; align-items:center; gap:6px; cursor:pointer;">
-                <input type="radio" name="avail_status" id="avail-status-online" value="online" checked>
-                <span style="font-weight:600; color:#15803d;">✅ Available & Cooking</span>
+            <label style="font-size: 13px; font-weight: 700; color: var(--text-muted); text-transform: uppercase; display: block; margin-bottom: 10px;">
+              Current Operational Status
+            </label>
+            <div style="display: flex; gap: 20px;">
+              <label style="display: flex; align-items: center; gap: 8px; cursor: pointer; font-size: 14px; font-weight: 600;">
+                <input type="radio" name="avail_status" id="avail-status-online" value="online" checked style="accent-color: var(--accent-green);">
+                <span>🟢 Available & Cooking (Accepting Orders)</span>
               </label>
-              <label style="display:flex; align-items:center; gap:6px; cursor:pointer;">
-                <input type="radio" name="avail_status" id="avail-status-offline" value="offline">
-                <span style="font-weight:600; color:#b91c1c;">⚠️ On Leave / Unavailable</span>
+              <label style="display: flex; align-items: center; gap: 8px; cursor: pointer; font-size: 14px; font-weight: 600;">
+                <input type="radio" name="avail_status" id="avail-status-offline" value="offline" style="accent-color: var(--accent-red);">
+                <span>🔴 Scheduled Leave / Closed</span>
               </label>
             </div>
           </div>
 
-          <div style="display:grid; grid-template-columns: 1fr 1fr; gap:16px; margin-bottom: 16px;">
+          <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-bottom: 16px;">
             <div class="filter-group">
-              <label for="leave-start-date">Leave Start Date</label>
+              <label for="leave-start-date">Leave Start Date (Optional)</label>
               <input type="date" id="leave-start-date" class="form-control">
             </div>
             <div class="filter-group">
-              <label for="leave-end-date">Leave End Date</label>
+              <label for="leave-end-date">Leave End Date (Optional)</label>
               <input type="date" id="leave-end-date" class="form-control">
             </div>
           </div>
 
-          <div class="filter-group" style="margin-bottom: 24px;">
-            <label for="leave-reason">Notice Message for Students</label>
-            <textarea id="leave-reason" class="form-control" rows="3" placeholder="e.g. Kitchen closed from Friday to Sunday due to family function. Resuming service on Monday!"></textarea>
+          <div class="filter-group" style="margin-bottom: 20px;">
+            <label for="leave-reason">Notice Message to Students</label>
+            <textarea id="leave-reason" class="form-control" rows="2" placeholder="e.g. Closed for Diwali festival from Friday to Sunday. Tiffins will resume Monday."></textarea>
           </div>
 
-          <button type="submit" class="btn btn-primary">Update Availability & Alert Students</button>
+          <button type="submit" class="btn btn-primary">Save Availability Status & Alert Students</button>
         </form>
       </div>
     </section>
 
-    <!-- Tab 4: Active Customers Directory -->
+    <!-- Tab 4: Subscribed Students Directory -->
     <section class="tab-content" id="tab-customers">
       <div class="content-box">
         <div class="content-box-header">
-          <h3>Subscribed Students Directory</h3>
+          <div>
+            <h3>Active Subscribed Students Directory</h3>
+            <span style="font-size:13px; color:var(--text-muted);">Accurate customer count to plan daily grocery procurement</span>
+          </div>
         </div>
-        <p style="font-size:13px; color:var(--dark-muted); margin-bottom:16px;">
-          Real customer count based on student subscriptions. Helps you forecast daily vegetable and chapati requirements accurately.
-        </p>
-
-        <table class="data-table">
-          <thead>
-            <tr>
-              <th>#</th>
-              <th>Student Name & Hostel Area</th>
-              <th>Phone</th>
-              <th>Plan Type</th>
-              <th>Status</th>
-            </tr>
-          </thead>
-          <tbody id="customers-table-body">
-            <!-- Injected dynamically -->
-          </tbody>
-        </table>
+        <div style="overflow-x: auto;">
+          <table class="data-table">
+            <thead>
+              <tr>
+                <th>#</th>
+                <th>Student & Area</th>
+                <th>Phone / WhatsApp</th>
+                <th>Plan Type</th>
+                <th>Status</th>
+              </tr>
+            </thead>
+            <tbody id="customers-table-body">
+              <!-- Injected dynamically by provider.js -->
+            </tbody>
+          </table>
+        </div>
       </div>
     </section>
 
@@ -224,48 +245,48 @@
     <section class="tab-content" id="tab-advertisements">
       <div class="content-box">
         <div class="content-box-header">
-          <h3>Promotional Banners & Announcements</h3>
-        </div>
-        <div style="display:grid; grid-template-columns: 1fr 1fr; gap:30px;">
           <div>
-            <h4 style="font-size:15px; margin-bottom:14px;">Your Active Advertisements</h4>
+            <h3>Special Offers & Promotions</h3>
+            <span style="font-size:13px; color:var(--text-muted);">Post promotions visible on student home and dashboard</span>
+          </div>
+        </div>
+
+        <div style="display: grid; grid-template-columns: 1.2fr 1fr; gap: 28px;">
+          <div>
+            <h4 style="font-size:15px; font-weight:800; margin-bottom:14px;">Active Promotions</h4>
             <div id="ads-list-container">
-              <!-- Rendered dynamically -->
+              <!-- Injected dynamically -->
             </div>
           </div>
-          <div style="background:#fafaf9; padding:20px; border-radius:var(--radius-sm); border:1px solid var(--border);">
-            <h4 style="font-size:15px; margin-bottom:14px;">Publish New Promotion</h4>
+
+          <div style="background:var(--bg-subtle); padding:20px; border-radius:var(--radius-md); border:1px solid var(--border-warm);">
+            <h4 style="font-size:15px; font-weight:800; margin-bottom:14px;">Create New Offer / Banner</h4>
             <form id="advertisement-form">
               <div class="filter-group" style="margin-bottom:12px;">
-                <label for="ad-title">Ad Headline</label>
-                <input type="text" id="ad-title" class="form-control" placeholder="e.g. 10% Off for 3-Month Mess Bookings" required>
+                <label for="ad-title">Offer Title</label>
+                <input type="text" id="ad-title" class="form-control" placeholder="e.g. 10% Off on Monthly Mess Card" required>
               </div>
-
               <div class="filter-group" style="margin-bottom:12px;">
-                <label for="ad-type">Banner Category</label>
+                <label for="ad-type">Banner Type</label>
                 <select id="ad-type" class="form-control">
-                  <option value="offer">Student Discount Offer</option>
-                  <option value="announcement">Sunday Special Announcement</option>
-                  <option value="new_menu">New Thali Launch</option>
+                  <option value="offer">Special Offer</option>
+                  <option value="announcement">Announcement</option>
+                  <option value="discount">Discount Pack</option>
                 </select>
               </div>
-
               <div class="filter-group" style="margin-bottom:12px;">
-                <label for="ad-valid-until">Offer Valid Until</label>
+                <label for="ad-valid-until">Valid Until Date</label>
                 <input type="date" id="ad-valid-until" class="form-control">
               </div>
-
               <div class="filter-group" style="margin-bottom:12px;">
-                <label for="ad-desc">Offer Description</label>
-                <textarea id="ad-desc" class="form-control" rows="2" placeholder="Details of the offer..." required></textarea>
+                <label for="ad-desc">Description</label>
+                <textarea id="ad-desc" class="form-control" rows="2" placeholder="e.g. First 20 students get free sweet on Sunday thali." required></textarea>
               </div>
-
-              <div class="filter-group" style="margin-bottom:18px;">
+              <div class="filter-group" style="margin-bottom:16px;">
                 <label for="ad-image-file">Promo Image (Optional)</label>
                 <input type="file" id="ad-image-file" class="form-control" accept="image/*">
               </div>
-
-              <button type="submit" class="btn btn-primary btn-sm">Publish Advertisement</button>
+              <button type="submit" class="btn btn-primary" style="width: 100%;">Publish Promotion</button>
             </form>
           </div>
         </div>
@@ -276,28 +297,35 @@
     <section class="tab-content" id="tab-reviews">
       <div class="content-box">
         <div class="content-box-header">
-          <h3>Customer Reviews & Weekly Ratings</h3>
-          <div style="display:flex; gap:16px; align-items:center;">
-            <div>Weekly Rating: <strong id="weekly-avg-display">⭐ 0.0</strong></div>
-            <span class="badge" id="weekly-count-display">0 reviews</span>
+          <div>
+            <h3>Student Feedback & Ratings</h3>
+            <span style="font-size:13px; color:var(--text-muted);">Verified feedback from hostel residents</span>
+          </div>
+          <div style="display:flex; gap:10px; align-items:center;">
+            <div id="weekly-avg-display" class="badge badge-rating">⭐ 0.0</div>
+            <span id="weekly-count-display" style="font-size:13px; color:var(--text-muted);">0 reviews</span>
           </div>
         </div>
         <div id="provider-reviews-list">
-          <!-- Rendered dynamically -->
+          <!-- Injected dynamically -->
         </div>
       </div>
     </section>
 
     <!-- Tab 7: Profile Settings -->
     <section class="tab-content" id="tab-profile">
-      <div class="content-box" style="max-width: 680px;">
+      <div class="content-box">
         <div class="content-box-header">
-          <h3>Edit Kitchen Profile</h3>
+          <div>
+            <h3>Kitchen Profile & Contact Details</h3>
+            <span style="font-size:13px; color:var(--text-muted);">Update your business information visible to students</span>
+          </div>
         </div>
-        <form id="profile-edit-form">
-          <div style="display:grid; grid-template-columns: 1fr 1fr; gap:14px; margin-bottom:14px;">
+
+        <form id="profile-edit-form" style="max-width: 680px;">
+          <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-bottom: 14px;">
             <div class="filter-group">
-              <label for="edit-service-name">Tiffin Service Name</label>
+              <label for="edit-service-name">Service / Mess Name</label>
               <input type="text" id="edit-service-name" class="form-control" required>
             </div>
             <div class="filter-group">
@@ -306,18 +334,18 @@
             </div>
           </div>
 
-          <div style="display:grid; grid-template-columns: 1fr 1fr; gap:14px; margin-bottom:14px;">
+          <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-bottom: 14px;">
             <div class="filter-group">
-              <label for="edit-area">Area in Pune</label>
+              <label for="edit-area">Operating Area (Pune)</label>
               <input type="text" id="edit-area" class="form-control" required>
             </div>
             <div class="filter-group">
-              <label for="edit-phone">Contact / WhatsApp</label>
+              <label for="edit-phone">Contact / WhatsApp Number</label>
               <input type="tel" id="edit-phone" class="form-control" required>
             </div>
           </div>
 
-          <div style="display:grid; grid-template-columns: 1fr 1fr 1fr; gap:14px; margin-bottom:14px;">
+          <div style="display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 14px; margin-bottom: 14px;">
             <div class="filter-group">
               <label for="edit-food-type">Food Type</label>
               <select id="edit-food-type" class="form-control">
@@ -336,14 +364,14 @@
             </div>
           </div>
 
-          <div class="filter-group" style="margin-bottom:14px;">
-            <label for="edit-address">Full Address / Landmark</label>
-            <input type="text" id="edit-address" class="form-control">
+          <div class="filter-group" style="margin-bottom: 14px;">
+            <label for="edit-desc">Service Description</label>
+            <textarea id="edit-desc" class="form-control" rows="3"></textarea>
           </div>
 
-          <div class="filter-group" style="margin-bottom:20px;">
-            <label for="edit-desc">Description</label>
-            <textarea id="edit-desc" class="form-control" rows="3"></textarea>
+          <div class="filter-group" style="margin-bottom: 20px;">
+            <label for="edit-address">Full Address / Landmark</label>
+            <input type="text" id="edit-address" class="form-control">
           </div>
 
           <button type="submit" class="btn btn-primary">Save Profile Changes</button>
@@ -352,7 +380,7 @@
     </section>
   </main>
 
-  <!-- Add/Edit Menu Item Modal -->
+  <!-- Add/Edit Menu Modal -->
   <div class="modal-overlay" id="menu-modal">
     <div class="modal-box">
       <div class="modal-header">
@@ -361,18 +389,20 @@
       </div>
       <form id="menu-form">
         <div class="modal-body">
-          <div class="filter-group" style="margin-bottom:14px;">
+          <div class="filter-group" style="margin-bottom: 12px;">
             <label for="menu-item-name">Dish / Thali Name</label>
-            <input type="text" id="menu-item-name" class="form-control" placeholder="e.g. Maharashtrian Deluxe Thali" required>
+            <input type="text" id="menu-item-name" class="form-control" placeholder="e.g. Maharashtrian Special Thali" required>
           </div>
-
-          <div style="display:grid; grid-template-columns: 1fr 1fr; gap:12px; margin-bottom:14px;">
+          <div class="filter-group" style="margin-bottom: 12px;">
+            <label for="menu-item-desc">Description (What's included?)</label>
+            <input type="text" id="menu-item-desc" class="form-control" placeholder="e.g. 4 Phulkas, Dal Tadka, Paneer Sabzi, Rice, Sweet">
+          </div>
+          <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 12px;">
             <div class="filter-group">
               <label for="menu-item-meal-type">Meal Type</label>
               <select id="menu-item-meal-type" class="form-control">
                 <option value="Lunch">Lunch</option>
                 <option value="Dinner">Dinner</option>
-                <option value="Breakfast">Breakfast</option>
                 <option value="All Day">All Day</option>
               </select>
             </div>
@@ -381,29 +411,21 @@
               <select id="menu-item-category" class="form-control">
                 <option value="Veg">Veg</option>
                 <option value="Non-Veg">Non-Veg</option>
-                <option value="Jain">Jain</option>
-                <option value="Special">Special Feast</option>
+                <option value="Special">Special Thali</option>
               </select>
             </div>
           </div>
-
-          <div class="filter-group" style="margin-bottom:14px;">
+          <div class="filter-group" style="margin-bottom: 16px;">
             <label for="menu-item-price">Price (₹)</label>
-            <input type="number" id="menu-item-price" class="form-control" placeholder="e.g. 80" min="10" required>
+            <input type="number" id="menu-item-price" class="form-control" placeholder="80" required min="10">
           </div>
-
-          <div class="filter-group" style="margin-bottom:14px;">
-            <label for="menu-item-desc">Dishes Included (Description)</label>
-            <textarea id="menu-item-desc" class="form-control" rows="2" placeholder="e.g. 4 Phulkas, Dal Tadka, Seasonal Bhaji, Jeera Rice, Salad"></textarea>
-          </div>
-
-          <div class="filter-toggle">
+          <label class="filter-toggle">
             <input type="checkbox" id="menu-item-available" checked>
-            <span>Mark Available for Ordering Today</span>
-          </div>
+            <span>Available for Ordering Today</span>
+          </label>
         </div>
         <div class="modal-footer">
-          <button type="button" class="btn btn-outline" id="menu-cancel-btn">Cancel</button>
+          <button type="button" class="btn btn-secondary" id="menu-cancel-btn">Cancel</button>
           <button type="submit" class="btn btn-primary">Save Dish</button>
         </div>
       </form>
@@ -412,7 +434,7 @@
 
   <footer class="footer">
     <div class="container footer-bottom">
-      <p>© 2026 CEP Tiffin Services Team | Pune, Maharashtra | Khane ki Khoj</p>
+      <p>© 2026 CEP Tiffin Services Team | Pune, Maharashtra | Khane Ki Khoj</p>
     </div>
   </footer>
 

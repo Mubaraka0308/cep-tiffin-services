@@ -3,27 +3,27 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Direct Chat | Khane ki Khoj - Tiffin Services</title>
+  <title>Direct Chat | Khane Ki Khoj</title>
   <link rel="stylesheet" href="css/style.css">
   <link rel="stylesheet" href="css/dashboard.css">
   <link rel="stylesheet" href="css/responsive.css">
 </head>
-<body>
+<body class="chat-page">
 
   <!-- Navigation Bar -->
   <header class="navbar">
     <div class="container nav-container">
       <a href="index.html" class="brand">
-        <div class="brand-icon">🍲</div>
+        <div class="brand-icon-box">🍱</div>
         <div class="brand-text">
-          <h1>Khane ki Khoj</h1>
-          <span>Direct Chat • Pune</span>
+          <h1>Khane Ki Khoj</h1>
+          <span>Home-Style Tiffin Services</span>
         </div>
       </a>
 
       <ul class="nav-links">
+        <li><a href="index.html">Home</a></li>
         <li><a href="student-dashboard.html">Browse Tiffins</a></li>
-        <li><a href="chat.html" class="active">Messages</a></li>
       </ul>
 
       <div class="nav-actions" id="nav-actions">
@@ -33,22 +33,22 @@
   </header>
 
   <!-- Chat Main Wrapper -->
-  <main class="container dashboard-wrapper">
+  <main class="container dashboard-wrapper chat-page-wrapper">
     <div class="chat-container">
       <!-- Left Sidebar: Conversations List -->
       <div class="chat-sidebar">
         <div class="chat-sidebar-header">
-          💬 Conversations
+          <span>💬 Conversations</span>
         </div>
         <div class="chat-conversations-list" id="conversations-list">
-          <div style="padding: 24px; text-align: center; color: var(--dark-muted); font-size: 13px;">
+          <div style="padding: 28px 20px; text-align: center; color: var(--text-muted); font-size: 13px;">
             Loading conversations...
           </div>
         </div>
       </div>
 
-      <!-- Right Main: Chat Messages & Input -->
-      <div class="chat-main">
+      <!-- Right Main: Active Chat Window -->
+      <div class="chat-main" id="chat-panel">
         <div class="chat-header">
           <div class="chat-header-user">
             <h3 id="chat-active-name">Select a Conversation</h3>
@@ -57,22 +57,24 @@
         </div>
 
         <div class="chat-messages" id="chat-messages-container">
-          <div style="text-align: center; padding: 40px; color: var(--dark-muted); font-size: 14px;">
-            👈 Click on a conversation from the left to read or send messages.
+          <div style="text-align: center; padding: 50px 20px; color: var(--text-muted); font-size: 14px;">
+            👈 Select a conversation on the left to start messaging.
           </div>
         </div>
 
         <form class="chat-input-bar" id="chat-message-form">
           <input type="text" id="chat-message-input" placeholder="Type a message..." disabled autocomplete="off" required>
-          <button type="submit" class="btn btn-primary" id="chat-send-btn" disabled>Send</button>
+          <button type="submit" class="btn btn-primary" id="chat-send-btn" disabled>
+            <span>Send</span> ✈️
+          </button>
         </form>
       </div>
     </div>
   </main>
 
-  <footer class="footer">
+  <footer class="footer chat-footer">
     <div class="container footer-bottom">
-      <p>© 2026 CEP Tiffin Services Team | Pune, Maharashtra | Khane ki Khoj</p>
+      <p>© 2026 CEP Tiffin Services Team | Pune, Maharashtra | Khane Ki Khoj</p>
     </div>
   </footer>
 

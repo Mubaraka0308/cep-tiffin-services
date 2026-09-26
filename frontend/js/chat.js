@@ -3,9 +3,42 @@
  * Direct Chat Script: Conversations List, Live Polling, Message Sending
  */
 
+/**
+ * Format a UTC timestamp string to Asia/Kolkata (IST) local time.
+ * Handles naive ISO strings (no Z suffix) by treating them as UTC.
+ * Shows time only for today's messages; prepends short date for older messages.
+ */
+function formatChatTimestamp(dateInput) {
+  if (!dateInput) return '';
+  let str = typeof dateInput === 'string' ? dateInput.trim() : String(dateInput);
+  // If no timezone info present, treat as UTC by appending Z
+  if (!str.endsWith('Z') && !/[+-]\d{2}(:?\d{2})?$/.test(str)) {
+    str += 'Z';
+  }
+  const date = new Date(str);
+  if (isNaN(date.getTime())) return '';
+  const timeFormatter = new Intl.DateTimeFormat('en-US', {
+    timeZone: 'Asia/Kolkata',
+    hour: '2-digit', minute: '2-digit', hour12: true
+  });
+  const toDateKey = (d) => new Intl.DateTimeFormat('en-US', {
+    timeZone: 'Asia/Kolkata', year: 'numeric', month: '2-digit', day: '2-digit'
+  }).format(d);
+  const now = new Date();
+  if (toDateKey(date) !== toDateKey(now)) {
+    const shortDate = new Intl.DateTimeFormat('en-US', {
+      timeZone: 'Asia/Kolkata', month: 'short', day: 'numeric'
+    }).format(date);
+    return shortDate + ', ' + timeFormatter.format(date);
+  }
+  return timeFormatter.format(date);
+}
+
 let activeConversationId = null;
 let chatPollingTimer = null;
 let currentUser = null;
+let lastRenderedCount = -1;
+let lastRenderedLastId = null;
 
 document.addEventListener("DOMContentLoaded", () => {
   currentUser = getUser();
@@ -84,7 +117,11 @@ async function loadConversations(autoSelectId = null) {
 
 // ================= Select Active Conversation =================
 window.selectConversation = function(convId, otherPartyName) {
-  activeConversationId = convId;
+  if (activeConversationId !== convId) {
+    activeConversationId = convId;
+    lastRenderedCount = -1;
+    lastRenderedLastId = null;
+  }
 
   // Highlight active conversation in sidebar
   document.querySelectorAll(".chat-conv-item").forEach(el => el.classList.remove("active"));
@@ -106,8 +143,8 @@ window.selectConversation = function(convId, otherPartyName) {
   }
   if (sendBtn) sendBtn.disabled = false;
 
-  // Load message history
-  loadMessages(convId);
+  // Load message history (initial load: isPolling = false -> auto-scrolls to bottom)
+  loadMessages(convId, false);
 
   // Restart polling timer for this conversation (every 3 seconds)
   if (chatPollingTimer) clearInterval(chatPollingTimer);
@@ -123,10 +160,17 @@ async function loadMessages(convId, isPolling = false) {
   const container = document.getElementById("chat-messages-container");
   if (!container) return;
 
+  // Detect scroll state before replacing messages:
+  // User is considered near bottom if within 100px of the bottom
+  const prevScrollTop = container.scrollTop;
+  const isNearBottom = (container.scrollHeight - container.scrollTop - container.clientHeight) < 100;
+
   try {
     const messages = await apiGet(`/api/conversations/${convId}/messages`);
 
     if (!messages || messages.length === 0) {
+      lastRenderedCount = 0;
+      lastRenderedLastId = null;
       container.innerHTML = `
         <div style="text-align:center; padding:40px; color:var(--dark-muted); font-size:13px;">
           💬 No messages yet. Say hello and introduce yourself!
@@ -135,10 +179,21 @@ async function loadMessages(convId, isPolling = false) {
       return;
     }
 
+    const newLastId = messages[messages.length - 1]?.id;
+    const hasChanged = messages.length !== lastRenderedCount || newLastId !== lastRenderedLastId;
+
+    // During polling, if no new messages arrived, leave the DOM untouched to avoid any scroll disruption
+    if (isPolling && !hasChanged) {
+      return;
+    }
+
+    lastRenderedCount = messages.length;
+    lastRenderedLastId = newLastId;
+
     container.innerHTML = messages.map(m => {
       const isSentByMe = m.sender_id === currentUser.user_id;
       const bubbleClass = isSentByMe ? "message-sent" : "message-received";
-      const timeStr = new Date(m.created_at).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+      const timeStr = formatChatTimestamp(m.created_at);
 
       return `
         <div class="message-bubble ${bubbleClass}">
@@ -148,9 +203,15 @@ async function loadMessages(convId, isPolling = false) {
       `;
     }).join("");
 
-    // Auto-scroll to bottom only if not manually scrolled or on initial load
-    if (!isPolling) {
+    // Auto-scroll logic:
+    // Scroll to bottom if:
+    // 1. Initial conversation open or user just sent a message (!isPolling)
+    // 2. OR user was already near the bottom when new message arrived (isNearBottom)
+    // Otherwise, keep user's current reading position so polling does not disrupt them.
+    if (!isPolling || isNearBottom) {
       container.scrollTop = container.scrollHeight;
+    } else {
+      container.scrollTop = prevScrollTop;
     }
   } catch (err) {
     console.error("Failed to load messages:", err);

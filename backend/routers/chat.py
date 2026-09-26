@@ -1,4 +1,4 @@
-from datetime import datetime
+from datetime import datetime, timezone
 from typing import List
 from fastapi import APIRouter, Depends, HTTPException, status
 from sqlalchemy.orm import Session
@@ -10,6 +10,13 @@ from backend.schemas import ConversationOut, MessageCreate, MessageOut
 from backend.auth_utils import get_current_user
 
 router = APIRouter(prefix="/api/conversations", tags=["Direct Chat"])
+
+
+def _as_utc(dt: datetime) -> datetime:
+    """Ensure naive UTC datetimes from DB serialize as aware UTC with 'Z' suffix."""
+    if dt is not None and dt.tzinfo is None:
+        return dt.replace(tzinfo=timezone.utc)
+    return dt
 
 
 @router.get("", response_model=List[ConversationOut])
@@ -55,6 +62,7 @@ def get_user_conversations(
 
         student_user = conv.student.user if conv.student else None
         provider_name = conv.provider.service_name if conv.provider else "Tiffin Service"
+        updated_dt = conv.last_message_at or conv.created_at
 
         result.append({
             "id": conv.id,
@@ -64,7 +72,7 @@ def get_user_conversations(
             "provider_name": provider_name,
             "last_message": last_msg.message_text if last_msg else "No messages yet",
             "unread_count": unread,
-            "updated_at": conv.last_message_at or conv.created_at
+            "updated_at": _as_utc(updated_dt)
         })
 
     return result
@@ -107,7 +115,7 @@ def start_or_get_conversation(
         "student_id": conv.student_id,
         "provider_id": conv.provider_id,
         "provider_name": provider.service_name,
-        "created_at": conv.created_at
+        "created_at": _as_utc(conv.created_at)
     }
 
 
@@ -157,7 +165,7 @@ def get_conversation_messages(
             "sender_role": sender.role if sender else "unknown",
             "message_text": m.message_text,
             "is_read": m.is_read,
-            "created_at": m.created_at
+            "created_at": _as_utc(m.created_at)
         })
 
     return result
@@ -225,5 +233,5 @@ def send_message(
         "sender_role": current_user.role,
         "message_text": new_message.message_text,
         "is_read": new_message.is_read,
-        "created_at": new_message.created_at
+        "created_at": _as_utc(new_message.created_at)
     }
