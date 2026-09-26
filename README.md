@@ -1,4 +1,4 @@
-# 🍲 Khane ki Khoj — CEP Tiffin Services
+# Khane ki Khoj — CEP Tiffin Services
 
 A realistic, full-stack college Community Engagement Project (CEP) connecting hostel students with verified local tiffin providers and messes in Pune (Dhankawadi, Sarita Vihar, Katraj, Bibwewadi).
 
@@ -6,7 +6,7 @@ Developed as part of the Second-Year Engineering Community Engagement Project ba
 
 ---
 
-## 🌟 Core Features
+## Core Features
 
 ### For Students:
 1. **Discovery & Filtering:** Search tiffins by Pune area, dietary preference (Pure Veg, Veg & Non-Veg, Jain), and budget.
@@ -26,7 +26,7 @@ Developed as part of the Second-Year Engineering Community Engagement Project ba
 
 ---
 
-## 🛠️ Technology Stack
+## Technology Stack
 
 * **Frontend:** HTML5, CSS3, Vanilla JavaScript (Zero build tools, runs directly in browser)
 * **Backend:** Python 3, FastAPI, Uvicorn
@@ -37,7 +37,7 @@ Developed as part of the Second-Year Engineering Community Engagement Project ba
 
 ---
 
-## 📁 Project Structure
+## Project Structure
 
 ```text
 cep-tiffin-services/
@@ -78,7 +78,7 @@ cep-tiffin-services/
 
 ---
 
-## 🚀 Quick Start Guide
+## Quick Start Guide
 
 ### 1. Prerequisites
 * Python 3.10 or higher
@@ -142,7 +142,7 @@ uvicorn backend.main:app --reload --host 127.0.0.1 --port 8000
 
 ---
 
-## 🔑 Demo Login Credentials (For Viva Evaluation)
+##  Demo Login Credentials (For Viva Evaluation)
 
 | Role | Username | Password | Notes |
 | :--- | :--- | :--- | :--- |
@@ -156,7 +156,7 @@ uvicorn backend.main:app --reload --host 127.0.0.1 --port 8000
 
 ---
 
-## 🧪 Automated Testing
+##  Automated Testing
 Run the automated test suite verifying all 20 core student and provider flows:
 ```bash
 python test_app.py
