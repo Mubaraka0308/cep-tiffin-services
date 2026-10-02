@@ -124,6 +124,7 @@ function updateNavigation() {
     const firstName = (user.full_name || user.username || "User").split(" ")[0];
 
     navActions.innerHTML = `
+      <button class="theme-toggle-btn" id="theme-toggle" aria-label="Toggle dark mode" title="Toggle dark mode"></button>
       <div style="position: relative;">
         <button class="notification-bell-btn" id="bell-btn" title="Notifications & Alerts">
           🔔
@@ -148,11 +149,14 @@ function updateNavigation() {
     `;
 
     setupNotificationSystem();
+    if (typeof setupThemeToggle === "function") setupThemeToggle();
   } else {
     navActions.innerHTML = `
+      <button class="theme-toggle-btn" id="theme-toggle" aria-label="Toggle dark mode" title="Toggle dark mode"></button>
       <a href="/login.html" class="btn btn-secondary btn-sm">Login</a>
       <a href="/register.html" class="btn btn-primary btn-sm">Sign Up</a>
     `;
+    if (typeof setupThemeToggle === "function") setupThemeToggle();
   }
 }
 

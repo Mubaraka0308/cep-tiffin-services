@@ -4,7 +4,8 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Direct Chat | Khane Ki Khoj</title>
-  <link rel="stylesheet" href="css/style.css">
+  <script src="js/theme.js"></script>
+    <link rel="stylesheet" href="css/style.css">
   <link rel="stylesheet" href="css/dashboard.css">
   <link rel="stylesheet" href="css/responsive.css">
 </head>
@@ -38,7 +39,7 @@
       <!-- Left Sidebar: Conversations List -->
       <div class="chat-sidebar">
         <div class="chat-sidebar-header">
-          <span>💬 Conversations</span>
+          <span>🍱 Conversations</span>
         </div>
         <div class="chat-conversations-list" id="conversations-list">
           <div style="padding: 28px 20px; text-align: center; color: var(--text-muted); font-size: 13px;">
@@ -51,9 +52,13 @@
       <div class="chat-main" id="chat-panel">
         <div class="chat-header">
           <div class="chat-header-user">
-            <h3 id="chat-active-name">Select a Conversation</h3>
-            <span id="chat-active-role">Direct student-provider communication</span>
+            <div class="chat-header-avatar" id="chat-header-avatar">🍱</div>
+            <div>
+              <h3 id="chat-active-name">Select a Conversation</h3>
+              <span id="chat-active-role">Direct student-provider communication</span>
+            </div>
           </div>
+          <span class="chat-header-brand" aria-hidden="true">🌿</span>
         </div>
 
         <div class="chat-messages" id="chat-messages-container">
@@ -63,12 +68,15 @@
         </div>
 
         <form class="chat-input-bar" id="chat-message-form">
-          <input type="text" id="chat-message-input" placeholder="Type a message..." disabled autocomplete="off" required>
-          <button type="submit" class="btn btn-primary" id="chat-send-btn" disabled>
-            <span>Send</span> ✈️
+          <input type="text" id="chat-message-input" placeholder="Write a message..." disabled autocomplete="off" required>
+          <button type="submit" class="chat-send-btn" id="chat-send-btn" disabled aria-label="Send message" title="Send">
+            <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+              <path d="M2.01 21L23 12 2.01 3 2 10l15 2-15 2z"/>
+            </svg>
           </button>
         </form>
       </div>
+
     </div>
   </main>
 

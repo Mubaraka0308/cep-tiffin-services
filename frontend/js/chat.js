@@ -130,15 +130,17 @@ window.selectConversation = function(convId, otherPartyName) {
   // Update Header
   const nameEl = document.getElementById("chat-active-name");
   const roleEl = document.getElementById("chat-active-role");
+  const avatarEl = document.getElementById("chat-header-avatar");
   if (nameEl) nameEl.innerText = otherPartyName;
   if (roleEl) roleEl.innerText = currentUser.role === "student" ? "Verified Tiffin Provider" : "Student Customer";
+  if (avatarEl) avatarEl.innerText = otherPartyName.charAt(0).toUpperCase();
 
   // Enable input field
   const input = document.getElementById("chat-message-input");
   const sendBtn = document.getElementById("chat-send-btn");
   if (input) {
     input.disabled = false;
-    input.placeholder = `Message ${otherPartyName}...`;
+    input.placeholder = `Write to ${otherPartyName}...`;
     input.focus();
   }
   if (sendBtn) sendBtn.disabled = false;
